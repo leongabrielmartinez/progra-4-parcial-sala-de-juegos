@@ -1,0 +1,70 @@
+/* --- Contenedor de la Navbar --- */
+.custom-navbar {
+  background-color: var(--bg-surface);
+  border-bottom: 2px solid var(--bg-surface-alt);
+  padding: 0.6rem 1.5rem;
+}
+
+.navbar-logo {
+  height: 38px;
+  width: auto;
+}
+
+.logo-texto {
+  font-size: 1.25rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- Enlaces Comunes (Inicio / Quién Soy) --- */
+.custom-navbar .navbar-nav .nav-link {
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.custom-navbar .navbar-nav .nav-link:hover,
+.custom-navbar .navbar-nav .nav-link.active {
+  color: var(--primary);
+}
+
+.custom-navbar .navbar-nav .nav-link.active {
+  font-weight: 700;
+}
+
+/* --- Botón Iniciar Sesión --- */
+.custom-navbar .navbar-nav .nav-link.btn-login {
+  color: var(--text-main);
+  margin-right: 0.5rem;
+}
+
+.custom-navbar .navbar-nav .nav-link.btn-login:hover,
+.custom-navbar .navbar-nav .nav-link.btn-login.active {
+  color: var(--primary);
+}
+
+/* --- Botón Registrarse --- */
+.custom-navbar .navbar-nav .nav-link.btn-register,
+.custom-navbar .navbar-nav .nav-link.btn-register.active,
+.custom-navbar .navbar-nav .nav-link.btn-register:focus,
+.custom-navbar .navbar-nav .nav-link.btn-register:active {
+  background-color: var(--primary);
+  color: var(--text-light);
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.custom-navbar .navbar-nav .nav-link.btn-register:hover {
+  filter: brightness(0.9);
+}
+
+/* --- Ajustes Responsivos (Móvil) --- */
+@media (max-width: 767.98px) {
+  .custom-navbar .navbar-nav .nav-link.btn-register {
+    margin-top: 0.5rem;
+  }
+}

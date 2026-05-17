@@ -1,11 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  /* --- Colores de Fondo --- */
+  --bg-main: #fff7f7;       /* Fondo general claro, limpio y moderno */
+  --bg-surface: #FFFFFF;    /* Tarjetas, contenedores principales y modales */
+  --bg-surface-alt: #F1F3F5;/* Fondos secundarios (burbujas de chat ajenas, inputs) */
 
-body {
-  font-family: 'Inter', sans-serif;
+  /* --- Colores de Marca y Acentos --- */
+  --primary: #1A5CFF;       /* Azul Eléctrico: Botones principales, victorias, interacción */
+  --secondary: #7209B7;     /* Violeta Vibrante: Chat propio, destaques de títulos */
+  --accent: #FF006E;        /* Rosa Eléctrico: Detalles pequeños y llamativos */
+
+  /* --- Estados Semánticos (Fórmula Light: Fondo suave + Texto oscuro) --- */
+  --success: #37B24D;       /* Verde: Éxito en login o juego ganado */
+  --success-bg: #E6F4EA;    /* Fondo verde pastel */
+
+  --danger: #F03E3E;        /* Rojo: Errores, botón salir o juego perdido */
+  --danger-bg: #FCE8E6;     /* Fondo rojo pastel */
+
+  --warning: #F59E0B;       /* Ámbar: Alertas de usuario ya registrado */
+  --warning-bg: #FFF3CD;    /* Fondo ámbar pastel */
+
+  /* --- Colores de Texto --- */
+  --text-main: #1A1D24;     /* Texto principal (Gris casi negro, excelente contraste) */
+  --text-muted: #6C757D;    /* Texto secundario (Gris para fechas, subtítulos, etc.) */
+  --text-light: #FFFFFF;    /* Texto blanco (Para usar DENTRO de botones oscuros) */
 }
 
-/* Estilo para los títulos de los juegos, el Navbar o marcadores */
-h1, h2, h3, .titulo-juego, .score-display {
+/* --- Aplicación Base de Fuentes y Estilos --- */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .titulo-juego {
   font-family: 'Orbitron', sans-serif;
-  letter-spacing: 1px; 
+  letter-spacing: 0.5px;
+  /* color: var(--text-main); */
 }
