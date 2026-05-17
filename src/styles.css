@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Estilo para los títulos de los juegos, el Navbar o marcadores */
+h1, h2, h3, .titulo-juego, .score-display {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px; 
+}

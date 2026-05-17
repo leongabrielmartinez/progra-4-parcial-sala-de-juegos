@@ -1,1 +1,45 @@
-<p>header works!</p>
+<!-- Inicio del menu -->
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid">
+        <!-- icono o nombre -->
+
+        <a class="navbar-brand" href="/">
+        <img src="game-controller.png" alt="" class="w-25">
+        <span class="text-warning m-2">Sala De Juegos</span>
+        </a>
+            
+        <!-- boton del menu -->
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- elementos del menu colapsable -->
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav me-auto">
+                <!-- Inicio / Home -->
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/home" routerLinkActive="active" aria-current="page">Inicio</a>
+                </li>
+                
+                <!-- Quién Soy -->
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/quien-soy" routerLinkActive="active">Quién Soy</a>
+                </li>
+                
+                <!-- Login -->
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
+                </li>
+
+                <!-- Registro -->
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/registro" routerLinkActive="active">Registrarse</a>
+                </li>
+            </ul>
+    
+        </div> 
+    </div>  
+</nav>
