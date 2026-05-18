@@ -42,3 +42,6 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Entornos con credenciales privadas
+src/environments/environment.development.ts
