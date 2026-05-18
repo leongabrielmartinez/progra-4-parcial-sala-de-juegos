@@ -1,0 +1,100 @@
+<div class="container d-flex flex-column align-items-center justify-content-center my-5 gap-4">
+  
+  <div class="card-wrapper w-100">
+    @if (githubData(); as user) {
+      <div class="card shadow-sm border-0 text-center p-4 custom-card">
+        
+        <div class="position-relative d-inline-block mx-auto mb-3">
+          <img [src]="user.avatar_url" 
+               [alt]="user.name" 
+               class="rounded-circle img-fluid shadow-sm profile-avatar" />
+        </div>
+        
+        <h2 class="h4 mb-2 card-title">
+          {{ user.name }}
+        </h2>
+        
+        <p class="small px-2 mb-4 card-bio">
+          {{ user.bio || 'Sin biografía disponible.' }}
+        </p>
+
+        <a [href]="user.html_url" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="btn w-100 fw-bold py-2 shadow-sm btn-github">
+          Ver perfil en GitHub
+        </a>
+      </div>
+    } @else {
+      <div class="text-center p-5 d-flex flex-column justify-content-center align-items-center loading-card shadow-sm">
+        <div class="spinner-border mb-3 custom-spinner" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="fw-medium m-0 text-muted-custom">Cargando datos de GitHub...</p>
+      </div>
+    }
+  </div>
+
+  <div class="card-wrapper w-100">
+    <div class="card shadow-sm border-0 p-4 custom-card">
+      
+      <div class="d-flex align-items-center mb-3">
+        <div class="rounded-3 p-2 me-3 d-flex align-items-center justify-content-center icon-container-game">
+          <i class="bi bi-eye fs-4"></i>
+        </div>
+        <h3 class="h4 m-0 fw-bold card-title">
+          Juego Propio: El Intruso
+        </h3>
+      </div>
+
+      <div class="p-3 rounded-3 text-start mb-4 rules-container">
+        <h4 class="h6 fw-bold mb-2 card-title">¿Cómo jugar?</h4>
+        <ul class="small m-0 ps-3 text-muted-custom d-flex flex-column gap-1">
+          <li>En pantalla se mostrará una cuadrícula de figuras idénticas y <strong>solo una</strong> sutilmente diferente.</li>
+          <li>Encuentra al "intruso" y haz clic sobre él antes de que el temporizador de 5 segundos llegue a cero.</li>
+          <li>A medida que avanzas, la cuadrícula crece y las diferencias se vuelven mucho más difíciles de notar.</li>
+          <li><strong>Victoria:</strong> Encuentra con éxito al intruso en los 10 niveles consecutivos.</li>
+          <li><strong>Derrota:</strong> Hacer clic en la figura incorrecta o quedarse sin tiempo.</li>
+        </ul>
+      </div>
+
+      <div class="p-3 rounded-3 text-start rules-container">
+        <h4 class="h6 fw-bold mb-3 card-title">Ejemplo:</h4>
+        
+        <div class="game-preview-grid row g-2 row-cols-5 justify-content-center mx-auto">
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-wink game-cell intruso"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+          <div class="col d-flex justify-content-center"><i class="bi bi-emoji-smile game-cell"></i></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

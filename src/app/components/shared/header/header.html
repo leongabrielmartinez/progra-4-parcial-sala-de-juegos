@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-md custom-navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <img src="game-controller.png" alt="Logo" class="navbar-logo me-2">
+            <span class="titulo-juego logo-texto">Sala De Juegos</span>
+        </a>
+            
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/home" routerLinkActive="active" aria-current="page">Inicio</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/quien-soy" routerLinkActive="active">Quién Soy</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link btn-login" routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn-register" routerLink="/registro" routerLinkActive="active">Registrarse</a>
+                </li>
+            </ul>
+    
+        </div> 
+    </div>  
+</nav>
