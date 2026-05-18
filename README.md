@@ -8,9 +8,7 @@
 ---
 
 ## 🚀 Despliegue de la Aplicación
-* **Enlace al Deploy:** [https://vercel.com/leon-gabriel-martinez-aquinos-projects/progra-4-parcial-sala-de-juegos/EWxLq84Xrgcxj1SA1wYA1hkBQnaj]
-
-* **Enlace del dominio Vercel:** [https://progra-4-parcial-sala-de-juegos.vercel.app/]
+* **Enlace al Deploy:** [[Sala de juegos](https://progra-4-parc-git-8016f4-leon-gabriel-martinez-aquinos-projects.vercel.app/)]
 
 ---
 
