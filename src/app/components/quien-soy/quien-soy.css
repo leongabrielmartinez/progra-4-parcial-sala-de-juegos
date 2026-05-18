@@ -1,0 +1,86 @@
+/* --- Contenedores y Estructura Base --- */
+.card-wrapper {
+  max-width: 450px;
+}
+
+.custom-card {
+  background-color: var(--bg-surface);
+  border-radius: 16px;
+}
+
+/* --- Elementos de Perfil --- */
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 4px solid var(--bg-main);
+}
+
+/* --- Tipografía y Colores de Texto --- */
+.card-title {
+  color: var(--text-main);
+}
+
+.card-bio {
+  color: var(--text-muted);
+  min-height: 40px;
+}
+
+.text-muted-custom {
+  color: var(--text-muted);
+}
+
+/* --- Bloques Internos --- */
+.rules-container {
+  background-color: var(--bg-surface-alt);
+}
+
+.icon-container-game {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+  padding: 0.5rem;
+}
+
+/* --- Estados de Carga --- */
+.loading-card {
+  background-color: var(--bg-surface);
+  border-radius: 16px;
+  min-height: 310px;
+}
+
+.custom-spinner {
+  color: var(--accent);
+  width: 3rem;
+  height: 3rem;
+}
+
+/* --- Botones Personalizados --- */
+.btn-github {
+  background-color: var(--primary);
+  color: var(--text-light);
+  border-radius: 8px;
+  border: none;
+}
+
+.btn-github:hover {
+  background-color: var(--primary);
+  filter: brightness(0.9);
+  color: var(--text-light);
+}
+
+/* --- Cuadrícula de Vista Previa del Juego --- */
+.game-preview-grid {
+  max-width: 320px; /* Incrementado sutilmente para acomodar los emojis más grandes */
+  padding: 4px;
+  background-color: transparent; /* El fondo ahora lo da el contenedor rules-container superior */
+}
+
+.game-cell {
+  font-size: 2.3rem; /* CORRECCIÓN: Emojis notablemente más grandes */
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+
+
