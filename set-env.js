@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-// Ruta donde se guardará el archivo de environment
-const targetPath = path.join(__dirname, './src/environments/environment.prod.ts');
+// AHORA APUNTAMOS AL ARCHIVO PRINCIPAL QUE LEERÁ EL BUILD
+const targetPath = path.join(__dirname, './src/environments/environment.ts');
 
 // Contenido del archivo usando la variable de entorno del sistema
 const envConfigFile = `export const environment = {
