@@ -1,34 +1,45 @@
 <nav class="navbar navbar-expand-md custom-navbar">
     <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="/">
-            <img src="game-controller.png" alt="Logo" class="navbar-logo me-2">
-            <span class="titulo-juego logo-texto">Sala De Juegos</span>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+            <div class="logo-icon-container">
+                <i class="bi bi-controller"></i>
+            </div>
+            <span class="logo-texto">Sala de Juegos</span>
         </a>
             
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="menu">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav ms-auto gap-2">
+                
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/home" routerLinkActive="active" aria-current="page">Inicio</a>
+                    <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i class="bi bi-house-door"></i> Inicio
+                    </a>
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/quien-soy" routerLinkActive="active">Quién Soy</a>
+                    <a class="nav-link" routerLink="/quien-soy" routerLinkActive="active">
+                        <i class="bi bi-person"></i> Quién Soy
+                    </a>
                 </li>
-            </ul>
+                
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login" routerLinkActive="active">
+                        <i class="bi bi-box-arrow-in-right"></i> Ingresar
+                    </a>
+                </li>
 
-            <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link btn-login" routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
+                    <a class="nav-link" routerLink="/registro" routerLinkActive="active">
+                        <i class="bi bi-person-plus"></i> Registro
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link btn-register" routerLink="/registro" routerLinkActive="active">Registrarse</a>
-                </li>
+
+                
             </ul>
-    
         </div> 
     </div>  
 </nav>

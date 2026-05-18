@@ -1,42 +1,74 @@
+/* ==========================================================================
+   Variables Globales - Paleta OKLCH Completa
+   ========================================================================== */
 :root {
-  /* --- Colores de Fondo --- */
-  --bg-main: #fff7f7;       /* Fondo general claro, limpio y moderno */
-  --bg-surface: #FFFFFF;    /* Tarjetas, contenedores principales y modales */
-  --bg-surface-alt: #F1F3F5;/* Fondos secundarios (burbujas de chat ajenas, inputs) */
+  --background: #f6f9fc;
+  --foreground: #252525;
+  
+  --card: #ffffff;
+  --card-foreground: #252525;
+  
+  --popover: #ffffff;
+  --popover-foreground: #252525;
+  
+  /* Nota: Este azul es ultra brillante en oklch, aquí su equivalente sRGB más vivo */
+  --primary: #0084ff; 
+  --primary-foreground: #fbfbfb;
+    
+  --secondary: #cdeef7;
+  --secondary-foreground: #27343a; 
 
-  /* --- Colores de Marca y Acentos --- */
-  --primary: #1A5CFF;       /* Azul Eléctrico: Botones principales, victorias, interacción */
-  --secondary: #7209B7;     /* Violeta Vibrante: Chat propio, destaques de títulos */
-  --accent: #FF006E;        /* Rosa Eléctrico: Detalles pequeños y llamativos */
+  --muted: #f5f5f5;
+  --muted-foreground: #898989;
+  
+  --accent: #f5f5f5;
+  --accent-foreground: #343434;
+  
+  --destructive: #e11d48;
+  --destructive-foreground: #e11d48;
+  
+  --border: #e8e8e8;
+  --input: #e8e8e8;
+  --ring: #aeaeae;
+  --radius: 0.625rem;
 
-  /* --- Estados Semánticos (Fórmula Light: Fondo suave + Texto oscuro) --- */
-  --success: #37B24D;       /* Verde: Éxito en login o juego ganado */
-  --success-bg: #E6F4EA;    /* Fondo verde pastel */
+  /* Gráficos */
+  --chart-1: #eb3e27;
+  --chart-2: #00a2aa;
+  --chart-3: #006495;
+  --chart-4: #e1cc64;
+  --chart-5: #f4a261;
 
-  --danger: #F03E3E;        /* Rojo: Errores, botón salir o juego perdido */
-  --danger-bg: #FCE8E6;     /* Fondo rojo pastel */
-
-  --warning: #F59E0B;       /* Ámbar: Alertas de usuario ya registrado */
-  --warning-bg: #FFF3CD;    /* Fondo ámbar pastel */
-
-  /* --- Colores de Texto --- */
-  --text-main: #1A1D24;     /* Texto principal (Gris casi negro, excelente contraste) */
-  --text-muted: #6C757D;    /* Texto secundario (Gris para fechas, subtítulos, etc.) */
-  --text-light: #FFFFFF;    /* Texto blanco (Para usar DENTRO de botones oscuros) */
+  /* Barra Lateral (Sidebar) */
+  --sidebar: #fbfbfb;
+  --sidebar-foreground: #252525;
+  --sidebar-primary: #343434;
+  --sidebar-primary-foreground: #fbfbfb;
+  --sidebar-accent: #f5f5f5;
+  --sidebar-accent-foreground: #343434;
+  --sidebar-border: #e8e8e8;
+  --sidebar-ring: #aeaeae;
 }
 
-/* --- Aplicación Base de Fuentes y Estilos --- */
+/* ==========================================================================
+   Estilos Base y Tipografías
+   ========================================================================== */
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--bg-main);
-  color: var(--text-main);
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, .titulo-juego {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 0.5px;
-  /* color: var(--text-main); */
+  color: var(--foreground);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

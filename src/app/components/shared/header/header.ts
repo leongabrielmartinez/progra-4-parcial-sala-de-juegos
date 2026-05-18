@@ -8,9 +8,5 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './header.css',
 })
 export class Header {
-logout() {
-throw new Error('Method not implemented.');
-}
-isLoggedIn: any;
-username: any;
+
 }
