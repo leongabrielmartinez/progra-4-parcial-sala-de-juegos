@@ -1,112 +1,113 @@
-/* Contenedor principal */
 .card-wrapper {
-  max-width: 500px; /* Evita que la tarjeta sea gigante en pantallas grandes */
+  max-width: 550px;
 }
 
-/* Tarjeta Base */
-.custom-card, .loading-card {
-  background-color: var(--card);
-  border: 1px solid var(--border) !important;
+.card.custom-card {
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 2px solid oklch(0.75 0.18 195 / 0.15);
   border-radius: var(--radius);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 25px oklch(0.10 0.02 260 / 0.6);
 }
 
-.custom-card:hover {
+.card.custom-card:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 8px 32px oklch(0.75 0.18 195 / 0.25);
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Títulos y Textos */
+.profile-avatar {
+  width: 110px;
+  height: 110px;
+  border: 3px solid var(--neon-cyan);
+  padding: 3px;
+  background-color: var(--background);
+  box-shadow: 0 0 15px oklch(0.75 0.18 195 / 0.4);
+}
+
 .card-title {
   color: var(--foreground);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
 }
 
 .card-bio {
   color: var(--muted-foreground);
+  line-height: 1.5;
+}
+
+.btn.btn-github {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+  color: var(--primary-foreground);
+  border: none;
+  border-radius: calc(var(--radius) - 0.25rem);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn.btn-github:hover {
+  filter: brightness(1.15);
+  color: var(--primary-foreground);
+  box-shadow: 0 0 15px oklch(0.70 0.22 330 / 0.5);
+  transform: scale(1.02);
+}
+
+.icon-container-game {
+  background: oklch(0.75 0.18 195 / 0.1);
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 10px oklch(0.75 0.18 195 / 0.2);
+}
+
+.rules-container {
+  background: var(--input);
+  border: 1px solid var(--border);
 }
 
 .text-muted-custom {
-  font-weight: 500;
-}
-
-/* Avatar de GitHub */
-.profile-avatar {
-  width: 110px;
-  height: 110px;
-  object-fit: cover;
-  border: 3px solid var(--border);
-  padding: 4px;
-  background-color: var(--background);
-}
-
-/* Botón Principal (Estilo GitHub con tu paleta) */
-.btn-github {
-  background-color: var(--primary);
-  color: var(--primary-foreground);
-  border: none;
-  border-radius: var(--radius);
-  transition: filter 0.2s ease, opacity 0.2s ease;
-}
-
-.btn-github:hover {
-  filter: brightness(1.15);
-  color: var(--primary-foreground);
-}
-
-.btn-github:active {
-  filter: brightness(0.9);
-}
-
-/* Spinner de carga */
-.custom-spinner {
-  color: var(--primary);
-}
-
-/* ==========================================================================
-   Sección del Juego: El Intruso
-   ========================================================================== */
-
-/* Contenedor de Icono de cabecera */
-.icon-container-game {
-  background-color: var(--secondary);
-  color: var(--secondary-foreground);
-}
-
-/* Contenedor de Reglas y Ejemplo */
-.rules-container {
-  background-color: var(--secondary);
-  border: 1px solid var(--border);
-}
-
-/* Resaltado de palabras clave en las reglas */
-.rules-container ul li span {
-  color: var(--primary);
-  font-weight: 600;
-}
-
-/* Cuadrícula de ejemplo del juego */
-.game-preview-grid {
-  max-width: 280px;
-  padding: 10px;
-  background-color: var(--card);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-}
-
-/* Celdas/Iconos del juego */
-.game-cell {
-  font-size: 1.25rem;
-  color: var(--muted-foreground);
-  transition: color 0.2s ease, transform 0.2s ease;
-  cursor: pointer;
-}
-
-.game-cell:hover {
   color: var(--foreground);
-  transform: scale(1.1);
 }
 
-/* El intruso (el guiño en el ejemplo) */
+.rules-container ul li span {
+  color: var(--neon-pink);
+  font-weight: bold;
+  text-shadow: 0 0 8px oklch(0.70 0.22 330 / 0.4);
+}
+
+.game-preview-grid {
+  max-width: 260px;
+  background: var(--background);
+  padding: 12px;
+  border-radius: calc(var(--radius) - 0.25rem);
+  border: 1px dashed var(--border);
+}
+
+.game-cell {
+  font-size: 1.35rem;
+  color: var(--muted-foreground);
+  opacity: 0.7;
+  transition: all 0.2s;
+}
+
 .game-cell.intruso {
-  color: var(--primary); /* Resalta sutilmente usando el color primario */
+  color: var(--neon-pink);
+  opacity: 1;
+  text-shadow: 0 0 10px oklch(0.70 0.22 330 / 0.8);
+  animation: glow 2s ease-in-out infinite;
+}
+
+.loading-card {
+  background: var(--card);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  min-height: 250px;
+}
+
+.custom-spinner {
+  color: var(--neon-cyan);
+  width: 2.5rem;
+  height: 2.5rem;
 }

@@ -1,62 +1,98 @@
-/* Contenedor principal del menú */
+nav{
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.05em;
+}
+
 .navbar.custom-navbar {
-  background-color: var(--card);
+  background-color: rgba(28, 34, 46, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-bottom: 1px solid var(--border);
-  padding: 0.75rem 2rem;
+  min-height: 64px;
+  padding: 0.5rem 1.5rem;
+  position: relative; 
 }
 
-/* Logotipo*/
-.navbar.custom-navbar .navbar-brand {
-  font-weight: 700;
-  font-size: 1.35rem;
-  color: var(--foreground);
+
+.navbar.custom-navbar .logo-texto {
+  font-size: 1.25rem;
+  font-weight: 900; /* Más grueso estilo arcade */
+  letter-spacing: 0.05em;
+  background: linear-gradient(to right, var(--neon-cyan), #e056fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 8px oklch(0.75 0.18 195 / 0.5));
 }
 
-/* Icono redondo azul del control de juego */
 .navbar.custom-navbar .logo-icon-container {
-  background-color: var(--primary);
-  color: #ffffff;
-  border-radius: 12px;
-  width: 40px;
-  height: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
 }
 
-/* Links de navegación - Estado Inactivo por defecto */
+/* MODIFICADO: El icono toma el mismo color cian brillante enfocado */
+.navbar.custom-navbar .logo-icon-container i {
+  color: var(--neon-cyan);
+  font-size: 1.6rem;
+  filter: drop-shadow(0 0 6px var(--neon-cyan));
+}
+
 .navbar.custom-navbar .navbar-nav .nav-link {
   color: var(--muted-foreground);
+  font-size: 0.875rem;
   font-weight: 500;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem; 
+  border: 2px solid transparent; 
+  border-radius: var(--bs-border-radius);
+  transition: all 0.2s ease;
 }
 
-/* [ESTADO HOVER] - Fondo gris claro de la paleta (--accent) */
-.navbar.custom-navbar .navbar-nav .nav-link:hover {
-  background-color: var(--accent);
-  color: var(--accent-foreground);
-}
-
-/* [ESTADO ACTIVO] - Fondo azul del elemento actual */
 .navbar.custom-navbar .navbar-nav .nav-link.active {
-  background-color: var(--primary);
-  color: #ffffff;
+  color: var(--neon-cyan);
+  background-color: rgba(0, 242, 254, 0.15);
+  border-color: var(--neon-cyan); 
+  box-shadow: 0 0 12px var(--neon-cyan), inset 0 0 8px oklch(0.75 0.18 195 / 0.4);
+  text-shadow: 0 0 6px var(--neon-cyan);
 }
 
-/* Evita que el hover sobreescriba los colores del botón activo actual */
-.navbar.custom-navbar .navbar-nav .nav-link.active:hover {
-  background-color: var(--primary);
-  color: #ffffff;
-  opacity: 0.9; /* Un leve cambio visual alternativo para el hover activo */
+.navbar.custom-navbar .navbar-nav .nav-link:hover:not(.active) {
+  color: var(--neon-cyan);
+  background-color: rgba(0, 242, 254, 0.08);
+  border-color: transparent; 
 }
 
-/* Centrado de flexbox para los items */
-.navbar.custom-navbar .navbar-nav {
-  align-items: center;
+.navbar.custom-navbar .navbar-toggler {
+  border-color: oklch(0.75 0.18 195 / 0.4);
+  padding: 0.25rem 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.navbar.custom-navbar .navbar-toggler:focus {
+  box-shadow: 0 0 10px var(--neon-cyan);
+  border-color: var(--neon-cyan);
+}
+
+.navbar.custom-navbar .navbar-toggler-icon {
+  filter: invert(74%) sepia(95%) saturate(3941%) hue-rotate(144deg) brightness(101%) contrast(101%) drop-shadow(0 0 4px var(--neon-cyan));
+}
+
+.navbar.custom-navbar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink), var(--neon-cyan));
+  background-size: 200% 200%;
+  opacity: 0.5;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
