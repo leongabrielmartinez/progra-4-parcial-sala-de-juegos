@@ -6,11 +6,11 @@ import { Router, RouterLink } from '@angular/router';
 import { SupaRegisterService } from '../../services/supabase/register/supa-register-service';
 import { SupaAuthService } from '../../services/supabase/auth/supa-auth-service';
 import { ModalAlertService } from '../../services/modal-alert';
+import { last } from 'rxjs';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  // LIMPIEZA: Quitamos ModalMessage de acá, el HTML ya no requiere conocerlo
   imports: [ReactiveFormsModule, RouterLink], 
   templateUrl: './registro.html',
   styleUrl: './registro.css',
@@ -26,10 +26,10 @@ export class Registro {
 
   registroForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    nombre: ['', [Validators.required, Validators.minLength(2)]],
-    apellido: ['', [Validators.required, Validators.minLength(2)]],
-    edad: ['', [Validators.required, Validators.min(18), Validators.max(99)]],
-    clave: ['', [Validators.required, Validators.minLength(6)]]
+    name: ['', [Validators.required, Validators.minLength(2)]],
+    lastName: ['', [Validators.required, Validators.minLength(2)]],
+    age: ['', [Validators.required, Validators.min(18), Validators.max(99)]],
+    password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
   async registerUser() {
@@ -37,20 +37,19 @@ export class Registro {
       this.errorMessage = ''; 
 
       const payload: UserRegisterPayload = {
-        nombre: this.registroForm.value.nombre!,
-        apellido: this.registroForm.value.apellido!,
-        edad: Number(this.registroForm.value.edad), 
+        name: this.registroForm.value.name!,
+        lastName: this.registroForm.value.lastName!,
+        age: Number(this.registroForm.value.age), 
         email: this.registroForm.value.email!,
-        clave: this.registroForm.value.clave!
+        password: this.registroForm.value.password!
       };
 
       try {
         await this.supabaseRegisterService.signUp(payload);
-        await this.supabaseAuthService.login(payload.email, payload.clave);
+        await this.supabaseAuthService.login(payload.email, payload.password);
         this.router.navigate(['/home']);
         
       } catch (error: any) {
-        // Al llamarse aquí, el CDK creará e inyectará el componente automáticamente en pantalla
         
         if(error.message === "User already registered"){
           error.message = "La cuenta de este gmail ya se encuentra registrada";

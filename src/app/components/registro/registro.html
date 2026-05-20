@@ -13,15 +13,15 @@
     <div class="row-gaming">
       <div class="input-group-cyber position-relative">
         <i class="bi bi-person icon-cyber"></i>
-        <input type="text" formControlName="nombre" placeholder="Nombre">
-        @if (registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched) {
+        <input type="text" formControlName="name" placeholder="Nombre">
+        @if (registroForm.get('name')?.invalid && registroForm.get('name')?.touched) {
           <small class="error-msg">Obligatorio</small>
         }
       </div>
 
       <div class="input-group-cyber position-relative">
-        <input type="text" formControlName="apellido" placeholder="Apellido">
-        @if (registroForm.get('apellido')?.invalid && registroForm.get('apellido')?.touched) {
+        <input type="text" formControlName="lastName" placeholder="Apellido">
+        @if (registroForm.get('lastName')?.invalid && registroForm.get('lastName')?.touched) {
           <small class="error-msg">Obligatorio</small>
         }
       </div>
@@ -37,23 +37,18 @@
 
     <div class="input-group-cyber position-relative">
       <i class="bi bi-calendar-event icon-cyber"></i>
-      <input type="number" formControlName="edad" placeholder="Edad">
-      @if (registroForm.get('edad')?.invalid && registroForm.get('edad')?.touched) {
+      <input type="number" formControlName="age" placeholder="Edad">
+      @if (registroForm.get('age')?.invalid && registroForm.get('age')?.touched) {
         <small class="error-msg">Requiere entre 18 y 99 años</small>
       }
     </div>
 
     <div class="input-group-cyber position-relative">
       <i class="bi bi-lock icon-cyber"></i>
-      <input type="password" formControlName="clave" placeholder="Contraseña">
-      @if (registroForm.get('clave')?.invalid && registroForm.get('clave')?.touched) {
+      <input type="password" formControlName="password" placeholder="Contraseña">
+      @if (registroForm.get('password')?.invalid && registroForm.get('password')?.touched) {
         <small class="error-msg">Mínimo 6 caracteres</small>
       }
-    </div>
-
-    <div class="input-group-cyber position-relative">
-      <i class="bi bi-lock icon-cyber"></i>
-      <input type="password" placeholder="Confirmar contraseña">
     </div>
 
     <button type="submit" class="btn-gaming w-100 mt-1" [disabled]="registroForm.invalid">
