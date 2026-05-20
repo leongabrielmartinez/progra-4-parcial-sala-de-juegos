@@ -28,10 +28,9 @@ export class Login {
       const clave = this.loginForm.value.clave!;
 
       try {
-        console.log("ok");
         const { data, error } = await this.supaAuthService.login(email, clave);
 
-        console.log("ok");
+
         if (error) {
           this.modalAlertService.showAlert(
             'Error de Autenticación', 
