@@ -1,1 +1,60 @@
-<p>registro works!</p>
+<div class="auth-container card-gaming">
+  
+  <form [formGroup]="registroForm" (ngSubmit)="registerUser()">
+    
+    <div class="row-gaming">
+      <div class="input-group-cyber">
+        <i class="bi bi-person icon-cyber"></i>
+        <input type="text" formControlName="nombre" placeholder="Nombre">
+        @if (registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched) {
+          <small class="error-msg">Obligatorio</small>
+        }
+      </div>
+
+      <div class="input-group-cyber">
+        <input type="text" formControlName="apellido" placeholder="Apellido">
+        @if (registroForm.get('apellido')?.invalid && registroForm.get('apellido')?.touched) {
+          <small class="error-msg">Obligatorio</small>
+        }
+      </div>
+    </div>
+
+    <div class="input-group-cyber">
+      <i class="bi bi-envelope icon-cyber"></i>
+      <input type="email" formControlName="email" placeholder="tu@email.com">
+      @if (registroForm.get('email')?.invalid && registroForm.get('email')?.touched) {
+        <small class="error-msg">Email inválido</small>
+      }
+    </div>
+
+    <div class="input-group-cyber">
+      <i class="bi bi-calendar-event icon-cyber"></i>
+      <input type="number" formControlName="edad" placeholder="Edad">
+      @if (registroForm.get('edad')?.invalid && registroForm.get('edad')?.touched) {
+        <small class="error-msg">Requiere entre 18 y 99 años</small>
+      }
+    </div>
+
+    <div class="input-group-cyber">
+      <i class="bi bi-lock icon-cyber"></i>
+      <input type="password" formControlName="clave" placeholder="Contraseña">
+      @if (registroForm.get('clave')?.invalid && registroForm.get('clave')?.touched) {
+        <small class="error-msg">Mínimo 6 caracteres</small>
+      }
+    </div>
+
+    <div class="input-group-cyber">
+      <i class="bi bi-lock icon-cyber"></i>
+      <input type="password" placeholder="Confirmar contraseña">
+    </div>
+
+    <button type="submit" class="btn-gaming" [disabled]="registroForm.invalid">
+      Registrarse
+    </button>
+
+    <div class="auth-footer-link">
+      ¿Ya tienes cuenta? <a routerLink="/login" class="link-cyber">Inicia sesión</a>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,31 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 1100; /* Por encima de cualquier navbar */
+}
+
+.modal-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  min-width: 300px;
+  max-width: 500px;
+  width: 90%;
+  border: 2px solid var(--border);
+}
+
+.btn-close-cyber {
+  background: transparent;
+  border: none;
+  color: var(--muted-foreground);
+  font-size: 1.2rem;
+  transition: color 0.2s;
+}
+
+.btn-close-cyber:hover {
+  color: var(--neon-pink);
+}
