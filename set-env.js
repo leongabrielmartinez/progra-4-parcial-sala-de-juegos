@@ -1,13 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 
-// AHORA APUNTAMOS AL ARCHIVO PRINCIPAL QUE LEERÁ EL BUILD
+// Apuntamos al archivo principal que leerá el build
 const targetPath = path.join(__dirname, './src/environments/environment.ts');
 
-// Contenido del archivo usando la variable de entorno del sistema
+// Contenido del archivo usando las variables de entorno del sistema (Vercel / Local)
 const envConfigFile = `export const environment = {
   production: true,
-  githubToken: '${process.env.GITHUB_TOKEN || ''}'
+  githubToken: '${process.env.GITHUB_TOKEN || ''}',
+  supabaseUrl: '${process.env.SUPABASE_URL || ''}',
+  supabaseKey: '${process.env.SUPABASE_KEY || ''}'
 };
 `;
 
