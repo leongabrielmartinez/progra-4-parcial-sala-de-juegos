@@ -1,2 +1,83 @@
-<p>home works!</p>
-<button (click)="testSesion()">ingresar</button>
+<div class="home-wrapper container-fluid d-flex flex-column align-items-center pt-custom text-center">
+
+  <div class="welcome-badge animate-float d-flex align-items-center justify-content-center gap-2 mb-4">
+    <i class="bi bi-controller"></i>
+    @if (isLoggedIn) {
+      ¡Bienvenido {{ username }}!
+    } @else {
+      Bienvenido a la aplicación
+    }
+  </div>
+
+  <div class="title-container mb-4">
+    <h1 class="title-line neon-text m-0">SALA DE</h1>
+    <h1 class="title-line neon-pink-text m-0">JUEGOS</h1>
+  </div>
+
+  <p class="description-text mx-auto mb-5 text-muted col-11 col-md-8 col-lg-6">
+    ¡Diviértete y pon a prueba tus reflejos! Chatea en vivo con la comunidad y registra tus mejores puntuaciones.
+  </p>
+
+  <div class="d-flex flex-row flex-wrap justify-content-center gap-4">
+    @if (isLoggedIn) {
+      <button class="btn btn-cyber-cyan" routerLink="/juegos">
+        Comenzar a Jugar
+      </button>
+      <button class="btn btn-cyber-dark" (click)="logout()">
+        Cerrar Sesión
+      </button>
+    } @else {
+      <button class="btn btn-cyber-cyan" routerLink="/registro">
+        REGISTRARSE
+      </button>
+      <button class="btn btn-cyber-dark" routerLink="/login">
+        INICIAR SESIÓN
+      </button>
+    }
+  </div>
+
+</div>
+
+<div class="container section-juegos mt-5 mb-5">
+  
+  <div class="text-center mb-5">
+    <h2 class="section-title neon-text text-uppercase m-0">Nuestros Juegos</h2>
+    <p class="section-subtitle mx-auto col-11 col-md-8 col-lg-6">
+      Elige tu desafío y demuestra de lo que eres capaz
+    </p>
+    <div class="section-divider mx-auto"></div>
+  </div>
+
+  <div class="row g-4 justify-content-center">
+    
+    @for (juego of juegos; track juego.titulo) {
+      <div class="col-12 col-md-6">
+        <div class="game-card game-card-large h-100 p-4 p-md-5 d-flex flex-column flex-md-row align-items-center justify-content-between text-start" [routerLink]="juego.link">
+          
+          <div class="d-flex flex-column flex-md-row align-items-center gap-4 text-center text-md-start">
+            <div class="game-icon-wrapper" [class.text-pink]="juego.esRosa">
+              <i class="bi" [class]="juego.icono"></i>
+            </div>
+            
+            <div>
+              <h3 class="game-title text-white mb-2">{{ juego.titulo }}</h3>
+              <p class="game-description m-0">{{ juego.descripcion }}</p>
+            </div>
+          </div>
+          
+          <div class="mt-4 mt-md-0 ps-md-3">
+            <span class="game-link text-uppercase d-flex align-items-center gap-2" [class.link-pink]="juego.esRosa">
+              Jugar <i class="bi bi-chevron-right fs-5"></i>
+            </span>
+          </div>
+          
+        </div>
+      </div>
+    } @empty {
+      <div class="col-12 text-center py-4">
+        <p class="text-muted m-0">No hay juegos disponibles en este momento.</p>
+      </div>
+    }
+
+  </div>
+</div>

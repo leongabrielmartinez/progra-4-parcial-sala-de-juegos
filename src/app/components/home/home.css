@@ -1,0 +1,187 @@
+/* Contenedor principal ajustado */
+.home-wrapper {
+  min-height: 80vh; 
+  /* pt-custom maneja un espacio chico y fluido respecto al nav tanto en mobile como en PC */
+  padding-top: clamp(2vh, 4vh, 6vh); 
+  padding-bottom: 2rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+/* El resto de tus estilos del título, badge y botones quedan igual... */
+
+/* Pastilla superior */
+.welcome-badge {
+  background-color: rgba(30, 41, 59, 0.3); /* Fondo oscuro muy sutil */
+  border: 1px solid rgba(115, 224, 255, 0.3);
+  color: var(--neon-cyan);
+  border-radius: 50px;
+  padding: 0.5rem 2rem;
+  font-size: 0.95rem;
+}
+
+/* Bloque del Mega Título */
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-line {
+  font-size: clamp(3rem, 7vw, 4.8rem); /* Escala según el dispositivo */
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: 0.05em;
+}
+
+/* Ajuste del eslogan */
+.description-text {
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  line-height: 1.5;
+  color: #94a3b8 !important; /* Gris claro apagado gaming */
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   BOTONES EXACTOS A LA IMAGEN (Respetando el radio de borde de tu CSS global)
+   ========================================================================== */
+
+/* Botón Izquierdo: Cyan Sólido */
+.btn-cyber-cyan {
+  background-color: var(--neon-cyan);
+  color: #12131a; /* Contraste oscuro para el texto */
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0.9rem 2.8rem;
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 15px rgba(115, 224, 255, 0.2);
+  transition: all 0.25s ease-in-out;
+}
+
+.btn-cyber-cyan:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px var(--neon-cyan);
+  background-color: var(--neon-cyan);
+  color: #12131a;
+}
+
+/* Botón Derecho: Contorno Oscuro Integrado */
+.btn-cyber-dark {
+  background-color: rgba(20, 24, 33, 0.6);
+  color: #e2e8f0; /* Blanco tiza */
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0.9rem 2.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius);
+  transition: all 0.25s ease-in-out;
+}
+
+.btn-cyber-dark:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(20, 24, 33, 0.9);
+  color: #ffffff;
+}
+
+/* Reseteo para foco de Bootstrap */
+.btn:focus {
+  box-shadow: none;
+}
+/* ==========================================================================
+   ESTILOS DE LA SECCIÓN "NUESTROS JUEGOS"
+   ========================================================================== */
+
+.section-title {
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  letter-spacing: 0.08em;
+}
+
+.section-subtitle {
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  color: var(--muted-foreground);
+  margin-top: 0.5rem;
+}
+
+.section-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+  border-radius: var(--radius);
+  margin-top: 1rem;
+}
+
+/* ==========================================================================
+   VERSION GRANDE DE GAME-CARD (Estructura 2x2)
+   ========================================================================== */
+
+.game-card-large {
+  cursor: pointer;
+  text-decoration: none;
+  min-height: 160px;
+}
+
+/* El CSS Global ya maneja el hover Cyan por defecto, acá agregamos la variante Pink */
+.game-card-large:has(.text-pink):hover {
+  border-color: var(--neon-pink);
+}
+
+/* Estilos internos de la tarjeta */
+.game-icon-wrapper {
+  font-size: 3.2rem;
+  color: var(--neon-cyan);
+  filter: drop-shadow(0 0 12px oklch(0.75 0.18 195 / 0.4));
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.game-icon-wrapper.text-pink {
+  color: var(--neon-pink);
+  filter: drop-shadow(0 0 12px oklch(0.70 0.22 330 / 0.4));
+}
+
+.game-card-large:hover .game-icon-wrapper {
+  transform: scale(1.12) rotate(-3deg);
+}
+
+.game-title {
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.game-description {
+  font-size: 0.95rem;
+  color: var(--muted-foreground);
+  max-width: 400px;
+}
+
+.game-link {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  transition: transform 0.2s ease, text-shadow 0.2s ease;
+}
+
+.game-link.link-pink {
+  color: var(--neon-pink);
+}
+
+/* Efectos de iluminación en el enlace al hacer hover en la tarjeta */
+.game-card-large:hover .game-link {
+  text-shadow: 0 0 10px var(--neon-cyan);
+  transform: translateX(3px);
+}
+
+.game-card-large:hover .game-link.link-pink {
+  text-shadow: 0 0 10px var(--neon-pink);
+}
+
+/* Adaptación para pantallas chicas */
+@media (max-width: 767.98px) {
+  .game-card-large {
+    text-align: center;
+  }
+}

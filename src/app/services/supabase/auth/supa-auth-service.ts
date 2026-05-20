@@ -45,4 +45,20 @@ export class SupaAuthService {
     } = await this.supabase.auth.getUser();
     return user;
   }
+
+// Consulta la tabla de la base de datos basándose en el ID autenticado
+  async getDataUser(userId: string) {
+    const { data, error } = await this.supabase
+      .from('usuarios') // Nombre de tu tabla en Supabase
+      .select('nombre, apellido, edad') // Campos obligatorios del TP
+      .eq('id', userId)
+      .single(); // Trae un único objeto en lugar de un array
+
+    if (error) {
+      console.error('Error al traer datos complementarios:', error);
+      return null;
+    }
+    return data;
+  }
+
 }
