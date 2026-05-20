@@ -1,0 +1,126 @@
+/* Cabecera superior y espaciado corregido */
+.joystick-icon-box {
+  width: 54px;
+  height: 54px;
+  background-color: oklch(0.25 0.022 260); /* Color --input del global.css */
+  border: 1px solid var(--neon-cyan);
+  border-radius: 1rem;
+  font-size: 1.6rem;
+}
+
+.text-cyber-cyan, .link-cyber {
+  color: var(--neon-cyan);
+}
+
+.text-cyber-orange {
+  color: var(--neon-orange); /* Naranja brillante de tu paleta */
+}
+
+.login-main-title {
+  color: var(--foreground); /* Blanco de alto contraste */
+  font-size: 1.85rem;
+  text-shadow: 0 0 12px oklch(0.75 0.18 195 / 0.6);
+}
+
+.login-subtitle {
+  color: var(--foreground); /* Subtítulo en blanco de alto contraste para legibilidad */
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+/* Tarjeta base e iluminación fija en Hover */
+.auth-container {
+  max-width: 440px;
+  background-color: var(--card);
+  border: 2px solid oklch(0.40 0.03 260 / 0.4);
+  border-radius: 1.25rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hover-neon-glow-fixed:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px var(--neon-cyan);
+}
+
+/* Elementos de formulario */
+.input-group-cyber input {
+  padding: 0.85rem 1.25rem;
+  background-color: oklch(0.25 0.022 260);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.input-group-cyber input:focus {
+  outline: none;
+  border-color: var(--neon-cyan);
+}
+
+.btn-gaming-cyan {
+  padding: 0.85rem;
+  background-color: var(--neon-cyan);
+  color: oklch(0.15 0.02 195); /* Contraste oscuro para el texto del botón brillante */
+  border: none;
+  border-radius: var(--radius);
+  font-weight: bold;
+}
+
+.btn-gaming-cyan:hover:not(:disabled) {
+  opacity: 0.95;
+  box-shadow: 0 0 12px oklch(0.75 0.18 195 / 0.5);
+}
+
+/* Separador de Acceso Rápido como línea continua */
+.separator-cyber {
+  color: var(--foreground);
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  width: 100%; /* Asegura que ocupe todo el ancho del formulario */
+}
+
+/* Descomentado y adaptado para que sea una sola línea fluida */
+.separator-cyber::before {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid oklch(0.40 0.03 260 / 0.6);
+}
+
+/* Botones de Testing y Textos Internos Ajustados */
+.quick-subtitle {
+  font-size: 0.8rem;
+  color: var(--foreground); /* Corregido a blanco para lectura impecable */
+}
+
+.btn-testing {
+  padding: 0.8rem 1rem;
+  background-color: oklch(0.25 0.022 260 / 0.6);
+  color: var(--foreground);
+  border: 1px solid oklch(0.40 0.03 260 / 0.7);
+  border-radius: var(--radius);
+  font-size: 0.82rem;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-testing:hover {
+  border-color: var(--neon-cyan);
+  background-color: oklch(0.25 0.022 260);
+}
+
+.quick-email-text {
+  color: var(--neon-cyan); /* Corregido de gris opaco a cyan claro para que se note el mail de prueba */
+  opacity: 0.8;
+  font-size: 0.78rem;
+}
+
+.registration-footer-text {
+  color: var(--foreground); /* Corregido pie a blanco */
+  font-size: 0.85rem;
+}
+
+.error-msg {
+  bottom: -1.1rem;
+  right: 0.25rem;
+  color: #ff5555;
+  font-size: 0.70rem;
+}

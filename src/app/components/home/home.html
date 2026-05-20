@@ -2,8 +2,8 @@
 
   <div class="welcome-badge animate-float d-flex align-items-center justify-content-center gap-2 mb-4">
     <i class="bi bi-controller"></i>
-    @if (isLoggedIn) {
-      ¡Bienvenido {{ username }}!
+    @if (isLoggedIn()) {
+      ¡Bienvenido {{ username() }}!
     } @else {
       Bienvenido a la aplicación
     }
@@ -19,8 +19,8 @@
   </p>
 
   <div class="d-flex flex-row flex-wrap justify-content-center gap-4">
-    @if (isLoggedIn) {
-      <button class="btn btn-cyber-cyan" routerLink="/juegos">
+    @if (isLoggedIn()) {
+      <button class="btn btn-cyber-cyan" (click)="scrollToJuegos()">
         Comenzar a Jugar
       </button>
       <button class="btn btn-cyber-dark" (click)="logout()">
@@ -38,7 +38,7 @@
 
 </div>
 
-<div class="container section-juegos mt-5 mb-5">
+<div id="nuestros-juegos" class="container section-juegos mt-5 mb-5">
   
   <div class="text-center mb-5">
     <h2 class="section-title neon-text text-uppercase m-0">Nuestros Juegos</h2>

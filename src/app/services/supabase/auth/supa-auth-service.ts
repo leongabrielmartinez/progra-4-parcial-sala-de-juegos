@@ -1,6 +1,5 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { SUPABASE_CLIENT } from '../token/supabase.token';
-
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +7,40 @@ import { SUPABASE_CLIENT } from '../token/supabase.token';
 export class SupaAuthService {
   private supabase = inject(SUPABASE_CLIENT);
 
-  constructor() { }
+  currentUserSignal = signal<{ isLoggedIn: boolean; username: string }>({
+    isLoggedIn: false,
+    username: ''
+  });
+
+  constructor() {
+    this.supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.user) {
+        this.loadExtendedUserData(session.user.id, session.user.email || 'Usuario');
+      } else {
+        this.currentUserSignal.set({
+          isLoggedIn: false,
+          username: ''
+        });
+      }
+    });
+  }
+
+  private async loadExtendedUserData(userId: string, defaultEmail: string) {
+    try {
+      const userData = await this.getDataUser(userId);
+      const fullName = userData ? `${userData.nombre} ${userData.apellido}` : defaultEmail;
+      
+      this.currentUserSignal.set({
+        isLoggedIn: true,
+        username: fullName
+      });
+    } catch (e) {
+      this.currentUserSignal.set({
+        isLoggedIn: true,
+        username: defaultEmail
+      });
+    }
+  }
 
   async login(email: string, pass: string) {
     return this.supabase.auth.signInWithPassword({
@@ -18,41 +50,32 @@ export class SupaAuthService {
   }
 
   async logOut() {
-    try{
-      const session = await this.getSession();
-      const user = session?.user;
-
-      return await this.supabase.auth.signOut().catch(()=>{
-        console.warn("Se intenta cerrar la sesión de un usuario inexistente. No queda ninguna sesión activa.");
+    try {
+      return await this.supabase.auth.signOut().catch(() => {
+        console.warn("Se intenta cerrar la sesión de un usuario inexistente.");
       });
-
-    }catch(error){
-      console.error('Error en logOut: ',error);
+    } catch (error) {
+      console.error('Error en logOut: ', error);
       throw error;
     }
   }
 
-  // Metodo menos seguro: retorna la sesion local y refresca si hace falta.
   async getSession() {
     const { data } = await this.supabase.auth.getSession();
     return data.session;
   }
 
-  // Retorna el usuario desde el servidor y sirve para validar auth real.
   async getUser() {
-    const {
-      data: { user },
-    } = await this.supabase.auth.getUser();
+    const { data: { user } } = await this.supabase.auth.getUser();
     return user;
   }
 
-// Consulta la tabla de la base de datos basándose en el ID autenticado
   async getDataUser(userId: string) {
     const { data, error } = await this.supabase
-      .from('usuarios') // Nombre de tu tabla en Supabase
-      .select('nombre, apellido, edad') // Campos obligatorios del TP
+      .from('usuarios')
+      .select('nombre, apellido, edad')
       .eq('id', userId)
-      .single(); // Trae un único objeto en lugar de un array
+      .single();
 
     if (error) {
       console.error('Error al traer datos complementarios:', error);
@@ -60,5 +83,4 @@ export class SupaAuthService {
     }
     return data;
   }
-
 }

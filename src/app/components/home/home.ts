@@ -1,15 +1,20 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { SupaAuthService } from '../../services/supabase/auth/supa-auth-service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   imports: [CommonModule, RouterModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home implements OnInit {
+export class Home {
   private supabaseService = inject(SupaAuthService);
+
+  isLoggedIn = computed(() => this.supabaseService.currentUserSignal().isLoggedIn);
+  username = computed(() => this.supabaseService.currentUserSignal().username);
+
   juegos = [
     {
       titulo: 'Ahorcado',
@@ -40,59 +45,21 @@ export class Home implements OnInit {
       esRosa: true
     }
   ];
-  // Estado de autenticación simulado (Acá te conectás a tu servicio de Auth)
-  isLoggedIn: boolean = false; 
-  username: string = '';
 
   constructor() {}
 
-  async ngOnInit(){
-      await this.checkAuthStatus();
-    }
-
-  private async checkAuthStatus(): Promise<void> {
+  async logout() {
     try {
-      const session = await this.supabaseService.getSession();
-
-      if (session?.user) {
-        // 1. Tenemos sesión activa de Supabase Auth
-        this.isLoggedIn = true;
-
-        // 2. Buscamos los datos extendidos en nuestra tabla personalizada
-        const UserData = await this.supabaseService.getDataUser(session.user.id);
-
-        if (UserData) {
-          // Si la tabla tiene los datos, formateamos el nombre completo exigido por el TP
-          this.username = `${UserData.nombre} ${UserData.apellido}`;
-        } 
-        
-        } else {
-          // No hay sesión activa
-          this.isLoggedIn = false;
-          this.username = '';
-        }
+      await this.supabaseService.logOut();
     } catch (error) {
-      console.error('Error en el estado de autenticación del Home:', error);
-      this.isLoggedIn = false;
-      this.username = '';
+      console.error('Error al cerrar sesión:', error);
     }
   }
 
-
-  logout() {
-    // Lógica para cerrar sesión
-    this.isLoggedIn = false;
-    this.username = '';
-    // this.authService.signOut();
+  scrollToJuegos() {
+    const elemento = document.getElementById('nuestros-juegos');
+    if (elemento) {
+      elemento.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
-
-  // async testSesion() {
-  //   const { data, error } = await this.supabaseService.login("testing@gmail.com", "123456");
-  //   if (error) {
-  //     console.error('Error de inicio de sesion:', error.message);
-  //     return;
-  //   }
-  //   const user = await this.supabaseService.getUser();
-  //   console.log(user);
-  // }
 }
