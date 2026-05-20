@@ -31,9 +31,15 @@ Durante este primer sprint se asentaron las bases estructurales y de diseño uni
 
 ---
 
-### ⏳ Sprint #2 (Próximamente)
-* **Estado:** *Pendiente de desarrollo*
-* **Alcance planificado:** Funcionalidad del Home principal con visibilidad adaptativa según el estado de sesión del usuario. Sistema de inicio de sesión rápido (botones automatizados) y validación de credenciales frente a servicios de autenticación (Supabase/Firebase). Formulario de registro interactivo con captura de metadatos del jugador (edad, nombre, apellido) y redirección automática tras el alta exitosa.
+### 🔹 Sprint #2 (Entrega Actual)
+Durante este segundo sprint se implementó el motor de autenticación completo y la reactividad global de la interfaz de usuario:
+* **Integración con Supabase Auth:** Configuración de servicios de inicio de sesión y persistencia local de la sesión de usuario.
+* **Arquitectura Basada en Angular Signals:** Migración del estado de autenticación a un flujo reactivo usando `signal` y `computed`. El sistema detecta automáticamente si hay una sesión activa en segundo plano sin bloquear la carga inicial del DOM de los componentes.
+* **Escucha en Tiempo Real:** Implementación del listener `onAuthStateChange` de Supabase desacoplado de hilos críticos para garantizar respuestas instantáneas en la navegación e inicio de sesión.
+* **Acceso Rápido (Testing):** Creación de un panel automatizado de credenciales (`Jugador 1`, `Jugador 2` y `Admin`) en el formulario de Login con inyección dinámica de datos a través de `patchValue`.
+* **Registro Extendido de Usuarios:** Formulario reactivo interactivo que valida y almacena metadatos complementarios exigidos (`nombre`, `apellido`, `edad`) directamente en la tabla personalizada de base de datos vinculada al ID de autenticación.
+* **Navegación Inteligente en Navbar:** El componente Header reacciona en tiempo real ocultando o mostrando las opciones de ingreso, mostrando el nombre completo del usuario activo y habilitando la destrucción segura de la sesión.
+* **Experiencia de Usuario (UX):** Rediseño visual unificado alternando paletas de colores neón (Cian para Login y Violeta/Pink para Registro) e inclusión de scroll cinemático automatizado (`scrollIntoView`) en la landing al pulsar el botón principal.
 
 ---
 

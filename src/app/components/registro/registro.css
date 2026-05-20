@@ -1,0 +1,121 @@
+.register-icon-box {
+  width: 54px;
+  height: 54px;
+  background-color: oklch(0.25 0.022 260);
+  border: 1px solid var(--neon-pink);
+  border-radius: 1rem;
+  font-size: 1.6rem;
+}
+
+.text-cyber-pink, .link-cyber-pink {
+  color: var(--neon-pink);
+}
+
+.link-cyber-pink:hover {
+  text-shadow: 0 0 8px oklch(0.70 0.22 330 / 0.6);
+}
+
+.register-main-title {
+  color: var(--foreground);
+  font-size: 1.85rem;
+  text-shadow: 0 0 12px oklch(0.70 0.22 330 / 0.6);
+}
+
+.register-subtitle {
+  color: var(--foreground);
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--card);
+  border: 2px solid oklch(0.40 0.03 260 / 0.4);
+  border-radius: 1.25rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hover-neon-pink-glow-fixed:hover {
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 20px oklch(0.70 0.22 330 / 0.5);
+}
+
+.row-gaming {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.input-group-cyber {
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+
+.input-group-cyber input {
+  width: 100%;
+  padding: 0.85rem 1rem 0.85rem 2.75rem;
+  background-color: oklch(0.25 0.022 260);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.05em;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-group-cyber input:focus {
+  outline: none;
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 8px oklch(0.70 0.22 330 / 0.4);
+}
+
+.row-gaming .input-group-cyber:last-child input {
+  padding-left: 1rem;
+}
+
+.icon-cyber {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted-foreground);
+  font-size: 1.1rem;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.btn-gaming {
+  padding: 0.85rem;
+  background-color: var(--neon-pink);
+  color: oklch(0.15 0.02 330);
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+
+.btn-gaming:hover:not(:disabled) {
+  opacity: 0.95;
+  box-shadow: 0 0 12px oklch(0.70 0.22 330 / 0.5);
+}
+
+.btn-gaming:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.error-msg {
+  position: absolute;
+  bottom: -1.1rem;
+  right: 0.25rem;
+  color: #ff5555;
+  font-size: 0.70rem;
+}
+
+.registration-footer-text {
+  color: var(--foreground);
+  font-size: 0.85rem;
+}
