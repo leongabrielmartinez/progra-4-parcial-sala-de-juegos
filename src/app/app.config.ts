@@ -8,7 +8,7 @@ import { createClient } from '@supabase/supabase-js';
 // 2. Importas tu token (ajusta la ruta según tu proyecto)
 import { SUPABASE_CLIENT } from './services/supabase/token/supabase.token';
 // 3. Importas tus variables de entorno
-import { environment } from '../environments/environment.development';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
