@@ -1,8 +1,3 @@
-nav{
-  font-family: 'Orbitron', sans-serif;
-  letter-spacing: 0.05em;
-}
-
 .navbar.custom-navbar {
   background-color: rgba(28, 34, 46, 0.8);
   backdrop-filter: blur(24px);
@@ -13,10 +8,9 @@ nav{
   position: relative; 
 }
 
-
 .navbar.custom-navbar .logo-texto {
   font-size: 1.25rem;
-  font-weight: 900; /* Más grueso estilo arcade */
+  font-weight: 900;
   letter-spacing: 0.05em;
   background: linear-gradient(to right, var(--neon-cyan), #e056fd);
   -webkit-background-clip: text;
@@ -29,7 +23,6 @@ nav{
   align-items: center;
 }
 
-/* MODIFICADO: El icono toma el mismo color cian brillante enfocado */
 .navbar.custom-navbar .logo-icon-container i {
   color: var(--neon-cyan);
   font-size: 1.6rem;
@@ -47,6 +40,7 @@ nav{
   border: 2px solid transparent; 
   border-radius: var(--bs-border-radius);
   transition: all 0.2s ease;
+  background: none;
 }
 
 .navbar.custom-navbar .navbar-nav .nav-link.active {
@@ -89,6 +83,27 @@ nav{
   background-size: 200% 200%;
   opacity: 0.5;
   animation: gradient-shift 3s ease infinite;
+}
+
+.nav-user-badge {
+  color: var(--foreground);
+  font-size: 0.875rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-right: 1px solid var(--border);
+}
+
+.navbar.custom-navbar .navbar-nav .btn-logout-cyber:hover {
+  color: var(--neon-pink);
+  background-color: rgba(255, 0, 127, 0.08);
+  border-color: transparent;
+}
+
+.text-cyber-cyan {
+  color: var(--neon-cyan);
 }
 
 @keyframes gradient-shift {

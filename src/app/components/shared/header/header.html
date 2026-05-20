@@ -12,7 +12,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="menu">
-            <ul class="navbar-nav ms-auto gap-2">
+            <ul class="navbar-nav ms-auto gap-2 align-items-center">
                 
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
@@ -26,18 +26,30 @@
                     </a>
                 </li>
                 
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/login" routerLinkActive="active">
-                        <i class="bi bi-box-arrow-in-right"></i> Ingresar
-                    </a>
-                </li>
+                @if (isLoggedIn()) {
+                    <li class="nav-item">
+                        <span class="nav-user-badge">
+                            <i class="bi bi-person-check text-cyber-cyan"></i> {{ username() }}
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn-logout-cyber" (click)="logout()">
+                            <i class="bi bi-box-arrow-right"></i> Salir
+                        </button>
+                    </li>
+                } @else {
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/login" routerLinkActive="active">
+                            <i class="bi bi-box-arrow-in-right"></i> Ingresar
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/registro" routerLinkActive="active">
-                        <i class="bi bi-person-plus"></i> Registro
-                    </a>
-                </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/registro" routerLinkActive="active">
+                            <i class="bi bi-person-plus"></i> Registro
+                        </a>
+                    </li>
+                }
                 
             </ul>
         </div> 
