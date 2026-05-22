@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, signal } from '@angular/core';
 import { SupaAuthService } from '../../services/supabase/auth/supa-auth-service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 export class Home {
   private supabaseService = inject(SupaAuthService);
 
+  isLoading = computed(() => this.supabaseService.isLoadingSignal());
   isLoggedIn = computed(() => this.supabaseService.currentUserSignal().isLoggedIn);
   username = computed(() => this.supabaseService.currentUserSignal().username);
 
