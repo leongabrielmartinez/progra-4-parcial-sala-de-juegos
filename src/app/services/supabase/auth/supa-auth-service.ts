@@ -21,11 +21,8 @@ export class SupaAuthService {
 
   private initAuthListener() {
     this.supabase.auth.onAuthStateChange((event, session) => {
-      // Monitoreo en consola para saber qué evento está ocurriendo
-      console.log(`Auth Event: ${event}`, session?.user?.email);
 
       if (session?.user) {
-        // Ejecutamos la carga sin bloquear el callback principal
         this.loadExtendedUserData(session.user.id, session.user.email || 'Usuario');
       } else {
         this.currentUserSignal.set({
@@ -38,12 +35,11 @@ export class SupaAuthService {
   }
 
   private async loadExtendedUserData(userId: string, defaultEmail: string) {
-    this.isLoadingSignal.set(true); // Nos aseguramos de que esté en true al empezar
+    this.isLoadingSignal.set(true); 
     
     try {
       const userData = await this.getDataUser(userId);
       
-      // Si userData es null (por error o RLS), usamos el email por defecto
       const fullName = userData?.nombre && userData?.apellido 
         ? `${userData.nombre} ${userData.apellido}` 
         : defaultEmail;
@@ -59,7 +55,6 @@ export class SupaAuthService {
         username: defaultEmail
       });
     } finally {
-      // ESTE BLOQUE SIEMPRE SE EJECUTARÁ
       this.isLoadingSignal.set(false);
     }
   }
@@ -73,7 +68,6 @@ export class SupaAuthService {
 
   async logOut() {
     try {
-      // Ponemos en carga mientras desloguea
       this.isLoadingSignal.set(true);
       await this.supabase.auth.signOut();
     } catch (error) {
