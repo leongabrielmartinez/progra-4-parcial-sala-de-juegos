@@ -20,28 +20,28 @@ export class Home {
     {
       titulo: 'Ahorcado',
       descripcion: 'Adivina la palabra oculta antes de que sea tarde.',
-      link: '/juegos/ahorcado',
+      link: '/games/ahorcado',
       icono: 'bi-person-lines-fill',
       esRosa: false
     },
     {
       titulo: 'Mayor o Menor',
       descripcion: '¿La siguiente carta será más alta o más baja? ¡Arriésgate!',
-      link: '/juegos/mayor-menor',
+      link: '/games/mayor-menor',
       icono: 'bi-arrow-down-up',
       esRosa: true
     },
     {
       titulo: 'Preguntados',
       descripcion: 'Demuestra cuánto sabes en esta trivia de preguntas.',
-      link: '/juegos/preguntados',
+      link: '/games/preguntados',
       icono: 'bi-patch-question',
       esRosa: false
     },
     {
       titulo: 'El Intruso',
       descripcion: 'Encuentra el elemento que no encaja con el resto.',
-      link: '/juegos/el-intruso',
+      link: '/games/el-intruso',
       icono: 'bi-incognito',
       esRosa: true
     }

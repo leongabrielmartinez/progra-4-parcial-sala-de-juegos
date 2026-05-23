@@ -21,7 +21,7 @@
 
 ## 📦 Historial de Desarrollo por Sprints
 
-### 🔹 Sprint #1 (Entrega Actual)
+### 🔹 Sprint #1 
 Durante este primer sprint se asentaron las bases estructurales y de diseño uniforme de la plataforma frontend:
 * **Estructura Base:** Configuración global del proyecto en Angular e integración nativa de Bootstrap 5 para el maquetado.
 * **Componentes Core:** Creación y enrutamiento inicial sin restricciones de los componentes esenciales (`Login`, `Registro`, `Bienvenida / Home` y `Quién Soy`).
@@ -31,7 +31,7 @@ Durante este primer sprint se asentaron las bases estructurales y de diseño uni
 
 ---
 
-### 🔹 Sprint #2 (Entrega Actual)
+### 🔹 Sprint #2 
 Durante este segundo sprint se implementó el motor de autenticación completo y la reactividad global de la interfaz de usuario:
 * **Integración con Supabase Auth:** Configuración de servicios de inicio de sesión y persistencia local de la sesión de usuario.
 * **Arquitectura Basada en Angular Signals:** Migración del estado de autenticación a un flujo reactivo usando `signal` y `computed`. El sistema detecta automáticamente si hay una sesión activa en segundo plano sin bloquear la carga inicial del DOM de los componentes.
