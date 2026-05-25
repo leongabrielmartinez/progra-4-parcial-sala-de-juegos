@@ -1,0 +1,239 @@
+/* ==========================================================================
+   Contenedor Principal y Grid Estructural (Clonado de Ahorcado)
+   ========================================================================== */
+.juego-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  transition: max-width 0.3s ease;
+}
+
+.game-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.game-stats {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+.layout-left, .layout-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.status-errores {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   Diseño de la Carta Física (Uso de posiciones absolutas en 4 esquinas)
+   ========================================================================== */
+.card-wrapper {
+  position: relative;
+  background-color: #0d0e12;
+  border: 2px solid var(--border);
+  border-radius: var(--bs-border-radius);
+  padding: 20px;
+  margin-bottom: 1rem;
+  box-shadow: inset 0 0 20px #000000, 0 0 15px rgba(0, 255, 255, 0.2);
+  min-height: 250px;
+  min-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playing-card {
+  width: 160px;
+  height: 220px;
+  background: #1a1d24;
+  border: 2px solid #00ffff;
+  border-radius: 12px;
+  position: relative; /* Clave para que las esquinas se ubiquen respecto a la carta */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Esto ahora solo centra el elemento del medio */
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.card-center {
+  font-size: 3.5rem;
+  filter: drop-shadow(0 0 10px currentColor);
+  position: relative;
+  z-index: 1;
+}
+
+/* Estilo común de las esquinas en fila */
+.card-corner {
+  position: absolute; /* Saca el elemento del flujo central */
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
+  z-index: 2;
+}
+
+.card-value {
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+/* Ubicación exacta de cada esquina de forma independiente */
+.top-left {
+  top: 10px;
+  left: 10px;
+}
+
+.top-right {
+  top: 10px;
+  right: 10px;
+}
+
+/* Se rotan 180° pero mantienen su layout invertido del HTML */
+.bottom-left {
+  bottom: 10px;
+  left: 10px;
+  transform: rotate(180deg);
+}
+
+.bottom-right {
+  bottom: 10px;
+  right: 10px;
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   Sección de Decisiones y Botonera Cyberpunk
+   ========================================================================== */
+.decision-box {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.instruction-text {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--foreground);
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.btn-gaming {
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  border-radius: var(--bs-border-radius);
+  border: 2px solid;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-gaming:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.btn-higher {
+  background: transparent;
+  border-color: #00ffff;
+  color: #00ffff;
+}
+
+.btn-higher:hover:not(:disabled) {
+  background: #00ffff;
+  color: #000;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  font-weight: bold;
+}
+
+.btn-lower {
+  background: transparent;
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+}
+
+.btn-lower:hover:not(:disabled) {
+  background: var(--neon-pink);
+  color: #000;
+  box-shadow: 0 0 15px oklch(0.70 0.22 330 / 0.6);
+  font-weight: bold;
+}
+
+.acciones {
+  width: 100%;
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+}
+
+.btn-outline:hover {
+  background: var(--neon-pink);
+  color: #000;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   Media Query: Pantallas grandes
+   ========================================================================== */
+@media (min-width: 768px) {
+  .juego-container {
+    max-width: 850px;
+    padding: 2.5rem;
+  }
+
+  .game-layout {
+    grid-template-columns: 220px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .layout-left, .layout-right {
+    align-items: flex-start;
+  }
+
+  .action-buttons {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .decision-box {
+    text-align: left;
+  }
+}

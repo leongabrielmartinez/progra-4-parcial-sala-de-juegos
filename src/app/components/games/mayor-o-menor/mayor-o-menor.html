@@ -1,0 +1,76 @@
+<div class="juego-container game-card">
+  
+  <div class="game-header">
+    <div class="game-stats orbitron-font">
+      <div>Aciertos: <span class="neon-text">{{ score() }}</span></div>
+      <div>Cartas restantes: <span class="neon-text">{{ cardsRemaining() }}</span></div>
+      <div>Tiempo restante: <span class="neon-pink-text">{{ timeLeft() }}s</span></div>
+    </div>
+  </div>
+
+  <div class="game-layout">
+    
+    <div class="layout-left">
+      <div class="svg-wrapper card-wrapper">
+        @if (currentCard()) {
+          <div class="playing-card">
+            
+            <div class="card-corner top-left" [className]="'card-corner top-left ' + currentCard()?.colorClass">
+              <span class="card-value">{{ getCardDisplayValue(currentCard()!.value) }}</span>
+            </div>
+
+            <div class="card-corner top-right" [className]="'card-corner top-right ' + currentCard()?.colorClass">
+              <i class="bi" [ngClass]="currentCard()!.icon"></i>
+            </div>
+            
+            <div class="card-center" [className]="currentCard()?.colorClass">
+              <i class="bi" [ngClass]="currentCard()!.icon"></i>
+            </div>
+
+            <div class="card-corner bottom-left" [className]="'card-corner bottom-left ' + currentCard()?.colorClass">
+              <i class="bi" [ngClass]="currentCard()!.icon"></i>
+            </div>
+            
+            <div class="card-corner bottom-right" [className]="'card-corner bottom-right ' + currentCard()?.colorClass">
+              <span class="card-value">{{ getCardDisplayValue(currentCard()!.value) }}</span>
+            </div>
+
+          </div>
+        }
+      </div>
+      
+      <p class="orbitron-font status-errores">
+        Errores: <strong class="neon-pink-text">{{ errors() }} / 5</strong>
+      </p>
+    </div>
+
+    <div class="layout-right">
+      <div class="decision-box">
+        <p class="orbitron-font instruction-text">¿La próxima carta será?</p>
+        
+        <div class="action-buttons">
+          <button 
+            class="btn-gaming btn-higher" 
+            [disabled]="errors() >= 5 || timeLeft() <= 0"
+            (click)="guess('higher')">
+            <i class="bi bi-arrow-up-circle-fill"></i> MAYOR (Up)
+          </button>
+          
+          <button 
+            class="btn-gaming btn-lower" 
+            [disabled]="errors() >= 5 || timeLeft() <= 0"
+            (click)="guess('lower')">
+            <i class="bi bi-arrow-down-circle-fill"></i> MENOR (Down)
+          </button>
+        </div>
+      </div>
+
+      <div class="acciones mt-auto">
+        <button class="btn-gaming btn-outline" (click)="startNewGame()">
+          Reiniciar juego
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

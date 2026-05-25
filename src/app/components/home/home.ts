@@ -27,7 +27,7 @@ export class Home {
     {
       titulo: 'Mayor o Menor',
       descripcion: '¿La siguiente carta será más alta o más baja? ¡Arriésgate!',
-      link: '/games/mayor-menor',
+      link: '/games/mayor-o-menor',
       icono: 'bi-arrow-down-up',
       esRosa: true
     },
