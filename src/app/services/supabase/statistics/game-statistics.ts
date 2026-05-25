@@ -1,0 +1,45 @@
+import { inject, Injectable } from '@angular/core';
+import { SUPABASE_CLIENT } from '../token/supabase.token';
+import { SupaAuthService } from '../auth/supa-auth-service';
+import { ResultDataAhorcado } from '../../../models/games-data/ahorcado-data';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class GameStatistics {
+  private supabase = inject(SUPABASE_CLIENT);
+  private supabaseService = inject(SupaAuthService);
+
+  async guardarPartidaAhorcado(partida: ResultDataAhorcado): Promise<void> {
+    try {
+      // 1. Obtenemos el ID del usuario directamente desde la sesión de Supabase
+      const user = await this.supabaseService.getUser();
+      if (!user) throw new Error('No se pudo verificar el usuario actual.');
+
+      // 2. Leemos el valor del Signal de Auth en este instante preciso para sacar el nombre
+      const nombreCompleto = this.supabaseService.currentUserSignal().username;
+
+      // 3. Insertamos los datos limpios en la base de datos
+      const { error } = await this.supabase
+        .from('resultados_ahorcado')
+        .insert([
+          {
+            user_id: user.id,
+            nombre_completo: nombreCompleto,
+            palabra: partida.palabra,
+            gano: partida.gano,
+            letras_acertadas: partida.letras_acertadas,
+            letras_falladas: partida.letras_falladas,
+            tiempo_gastado: partida.tiempo_utilizado,
+            tiempo_sobrante: partida.tiempo_sobrante
+          }
+        ]);
+
+      if (error) throw error;
+
+    } catch (error) {
+      console.error('Error al guardar estadísticas de Ahorcado:', error);
+      throw error;
+    }
+  }
+}

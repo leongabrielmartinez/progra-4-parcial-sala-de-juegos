@@ -1,10 +1,12 @@
 import { Component, signal, effect, OnDestroy, inject } from '@angular/core';
 import { ModalAlertService } from '../../../services/modal-alert';
+import { GameStatistics } from '../../../services/supabase/statistics/game-statistics';
+import { ResultDataAhorcado } from '../../../models/games-data/ahorcado-data';
 
 // Constantes globales de configuración
 const GAME_TIME_SECONDS = 60;
 const TOTAL_ROUNDS = 5;
-const WORD_LIST = ['AB'];
+const WORD_LIST = ['ABC'];
 const ALPHABET = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('');
 
 @Component({
@@ -15,6 +17,7 @@ const ALPHABET = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('');
 })
 export class Ahorcado implements OnDestroy {
   private modalAlertService = inject(ModalAlertService);
+  private gameStatisticsService = inject(GameStatistics);
   readonly alphabet = ALPHABET;
 
   // Estado del juego usando Signals
@@ -23,36 +26,41 @@ export class Ahorcado implements OnDestroy {
   currentRound = signal<number>(1);
   score = signal<number>(0);
   currentWord = signal<string>('');
-  //letras adivinadas
   guessedLetters = signal<Set<string>>(new Set());
 
-/* * En JavaScript, los intervalos creados con `setInterval` se ejecutan de forma asíncrona
- * y en segundo plano, corriendo de manera independiente al flujo principal de la aplicación.
- 
- * Existen funciones nativas, por ejemplo `clearInterval()` para manejarlos.
- */
+  // Métricas acumuladas para la estadística del juego
+  totalCorrectLetters = 0;
+  totalFailedLetters = 0;
+  totalTimeUsed = 0;
+  totalTimeLeft = 0;
 
   private timerInterval: any;
+  private isGameOver = false; // Bandera para evitar ejecuciones duplicadas en el effect
 
   constructor() {
     this.startNewGame();
 
     // Efecto reactivo: Verifica condiciones de victoria o derrota al cambiar el estado
     effect(() => {
+      if (this.isGameOver) return; // Bandera para evitar ejecuciones duplicadas en el effect
+
       if (this.errors() >= 6 || this.timeLeft() <= 0) {
-        //Puede seguir jugando
         this.handleGameOver(false);
       } else if (this.currentWord() && this.checkWinCondition()) {
-        //Se termino el juego (puede haber ganado o perdido)
         this.handleGameOver(true);
       }
     });
   }
 
-  // Reiniciar todo el juego 
+  // Reiniciar todo el juego desde cero
   startNewGame() {
     this.score.set(0);
     this.currentRound.set(1);
+    this.isGameOver = false;
+    this.totalCorrectLetters = 0;
+    this.totalFailedLetters = 0;
+    this.totalTimeUsed = 0;
+    this.totalTimeLeft = 0;
     this.initRound();
   }
 
@@ -60,14 +68,11 @@ export class Ahorcado implements OnDestroy {
   initRound() {
     this.errors.set(0);
     this.timeLeft.set(GAME_TIME_SECONDS);
-    //letras adivinadas
     this.guessedLetters.set(new Set());
     
-    // Selecciona una palabra aleatoria de la lista
     const randomIndex = Math.floor(Math.random() * WORD_LIST.length);
     this.currentWord.set(WORD_LIST[randomIndex]);
 
-    // Inicia el cronómetro deteniendo cualquier temporizador previo activo
     this.stopTimer();
     this.timerInterval = setInterval(() => {
       if (this.timeLeft() > 0) {
@@ -83,22 +88,18 @@ export class Ahorcado implements OnDestroy {
     }
   }
 
-  // Procesa la letra seleccionada por el usuario
+  // Procesa la letra seleccionada por el usuario (desde botones, no teclado)
   guessLetter(letter: string) {
-    //letra adivinada
-    // Bloquea la acción si la letra ya se usó, si se agotaron los errores o el tiempo
-    if (this.guessedLetters().has(letter) || this.errors() >= 6 || this.timeLeft() <= 0) {
+    if (this.isGameOver || this.guessedLetters().has(letter) || this.errors() >= 6 || this.timeLeft() <= 0) {
       return;
     }
 
-    // Registra la letra elegida en el Set reactivo
     this.guessedLetters.update(set => {
       const newSet = new Set(set);
       newSet.add(letter);
       return newSet;
     });
 
-    // Cuenta cuántas veces aparece la letra en la palabra actual
     const word = this.currentWord();
     let occurrences = 0;
 
@@ -108,11 +109,12 @@ export class Ahorcado implements OnDestroy {
       }
     }
 
-    // Asigna puntos o incrementa el contador de fallos
     if (occurrences > 0) {
       this.score.update(s => s + (occurrences * 10));
+      this.totalCorrectLetters++; // Acumulamos para la estadística
     } else {
       this.errors.update(e => e + 1);
+      this.totalFailedLetters++; // Acumulamos para la estadística
     }
   }
 
@@ -123,8 +125,13 @@ export class Ahorcado implements OnDestroy {
   }
 
   // Maneja el desenlace de la ronda actual
-  handleGameOver(isWin: boolean) {
+  async handleGameOver(isWin: boolean) {
     this.stopTimer();
+
+    // Sumamos las métricas de esta ronda a los totales generales
+    const timeUsedInRound = GAME_TIME_SECONDS - this.timeLeft();
+    this.totalTimeUsed += timeUsedInRound;
+    this.totalTimeLeft += this.timeLeft();
 
     if (isWin) {
       // Otorga puntos extra basados en los segundos restantes
@@ -134,18 +141,43 @@ export class Ahorcado implements OnDestroy {
         this.currentRound.update(r => r + 1);
         this.initRound();
       } else {
+        // GANÓ EL JUEGO COMPLETO (Pasó las 5 rondas)
+        this.isGameOver = true;
+        await this.guardarEstadisticasFinales(true);
         this.modalAlertService.showAlert(
-          'Ganaste',
-          `Obtuviste ${this.score()} puntos.`,
-          'info' 
+          '¡Felicidades, ganaste el juego!',
+          `Completaste las ${TOTAL_ROUNDS} rondas con un total de ${this.score()} puntos.`,
+          'success' // Cambiar a modales según consigna
         );
       }
     } else {
-        this.modalAlertService.showAlert(
-          'Perdiste',
-          `Obtuviste ${this.score()} puntos.`,
-          'info' 
-        );
+      // PERDIÓ EL JUEGO (Se quedó sin tiempo o llegó a 6 errores)
+      this.isGameOver = true;
+      await this.guardarEstadisticasFinales(false);
+      this.modalAlertService.showAlert(
+        'Juego Terminado',
+        `Te quedaste sin intentos o tiempo en la ronda ${this.currentRound()}. Puntuación final: ${this.score()} puntos.`,
+        'error' // Cambiar a modales según consigna
+      );
+    }
+  }
+
+  // Envía la estructura limpia a tu servicio GameStatistics
+  private async guardarEstadisticasFinales(ganoJuego: boolean) {
+    const datosPartida: ResultDataAhorcado = {
+      palabra: this.currentWord(), // Guarda la última palabra jugada
+      gano: ganoJuego,
+      letras_acertadas: this.totalCorrectLetters,
+      letras_falladas: this.totalFailedLetters,
+      tiempo_utilizado: this.totalTimeUsed,
+      tiempo_sobrante: this.totalTimeLeft
+    };
+
+    try {
+      await this.gameStatisticsService.guardarPartidaAhorcado(datosPartida);
+      console.log('Estadísticas guardadas con éxito en Supabase.');
+    } catch (error) {
+      console.error('No se pudieron registrar las estadísticas del juego:', error);
     }
   }
 
@@ -155,7 +187,6 @@ export class Ahorcado implements OnDestroy {
     return this.currentWord().split('').map(letter => guesses.has(letter) ? letter : '_');
   }
 
-  // Asegura la limpieza del intervalo cuando el componente se destruye en Angular
   ngOnDestroy() {
     this.stopTimer();
   }
