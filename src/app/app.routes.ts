@@ -35,6 +35,10 @@ export const routes: Routes = [
                 path: 'mayor-o-menor',
                 loadComponent: () => import('./components/games/mayor-o-menor/mayor-o-menor').then(m => m.MayorMenor)
             },
+            {
+                path: 'preguntados',
+                loadComponent: () => import('./components/games/preguntados/preguntados').then(m => m.Preguntados)
+            },
         ]
     },
 

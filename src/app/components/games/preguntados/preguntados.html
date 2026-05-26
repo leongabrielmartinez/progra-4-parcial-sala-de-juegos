@@ -1,0 +1,19 @@
+<div style="padding: 20px; font-family: Arial, sans-serif;">
+  <h2>Testeo de Preguntas de la API</h2>
+  <hr>
+
+  @if (preguntas.length > 0) {
+    @for (item of preguntas; track $index) {
+      <div style="margin-bottom: 25px; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
+        <p><strong>Pregunta N°:</strong> {{ $index + 1 }}</p>
+        <p><strong>Categoría:</strong> {{ item.category }}</p>
+        <p><strong>Dificultad:</strong> {{ item.difficulty }}</p>
+        <p><strong>Enunciado:</strong> <span [innerHTML]="item.question"></span></p>
+        <p style="color: green;"><strong>Respuesta Correcta:</strong> {{ item.correct_answer }}</p>
+        <p style="color: red;"><strong>Respuestas Incorrectas:</strong> {{ item.incorrect_answers.join(', ') }}</p>
+      </div>
+    }
+  } @else {
+    <p>Conectando con la API pública y trayendo preguntas...</p>
+  }
+</div>
