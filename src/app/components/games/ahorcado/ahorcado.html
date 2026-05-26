@@ -1,0 +1,61 @@
+<div class="juego-container game-card">
+  
+  <div class="game-header">
+    <div class="game-stats orbitron-font">
+      <div>Ronda: <span class="neon-text">{{ currentRound() }}</span>/5</div>
+      <div>Puntuación: <span class="neon-text">{{ score() }}</span></div>
+      <div>Tiempo restante: <span class="neon-pink-text">{{ timeLeft() }}s</span></div>
+    </div>
+  </div>
+
+  <div class="game-layout">
+    
+    <div class="layout-left">
+      <div class="svg-wrapper">
+        <svg height="250" width="200" class="ahorcado-svg">
+          <line x1="20" y1="230" x2="180" y2="230" class="horca-estructura" />
+          <line x1="60" y1="20" x2="60" y2="230" class="horca-estructura" />
+          <line x1="60" y1="20" x2="140" y2="20" class="horca-estructura" />
+          <line x1="140" y1="20" x2="140" y2="50" class="horca-cuerda" />
+
+          @if (errors() >= 1) { <circle cx="140" cy="70" r="20" class="monigote" /> }
+          @if (errors() >= 2) { <line x1="140" y1="90" x2="140" y2="150" class="monigote" /> }
+          @if (errors() >= 3) { <line x1="140" y1="110" x2="110" y2="130" class="monigote" /> }
+          @if (errors() >= 4) { <line x1="140" y1="110" x2="170" y2="130" class="monigote" /> }
+          @if (errors() >= 5) { <line x1="140" y1="150" x2="110" y2="190" class="monigote" /> }
+          @if (errors() >= 6) { <line x1="140" y1="150" x2="170" y2="190" class="monigote-critico" /> }
+        </svg>
+      </div>
+      
+      <p class="orbitron-font status-errores">
+        Errores: <strong class="neon-pink-text">{{ errors() }} / 6</strong>
+      </p>
+    </div>
+
+    <div class="layout-right">
+      <div class="word-display orbitron-font">
+        @for (letter of getHiddenWord(); track $index) {
+          <span class="word-letter" [class.revealed]="letter !== '_'">{{ letter }}</span>
+        }
+      </div>
+
+      <div class="keyboard">
+        @for (letter of alphabet; track letter) {
+          <button 
+            class="btn-key" 
+            [disabled]="guessedLetters().has(letter) || errors() >= 6 || timeLeft() <= 0"
+            (click)="guessLetter(letter)">
+            {{ letter }}
+          </button>
+        }
+      </div>
+
+      <div class="acciones">
+        <button class="btn-gaming btn-outline" (click)="startNewGame()">
+          Reiniciar juego
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

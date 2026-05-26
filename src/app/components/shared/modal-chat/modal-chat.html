@@ -1,0 +1,34 @@
+<div class="game-chat-box">
+  <div class="chat-header">
+    <span class="chat-title"><i class="bi bi-terminal"></i> SALA_GLOBAL</span>
+    <button class="btn-close-chat" (click)="dialogRef.close()"><i class="bi bi-x-lg"></i></button>
+  </div>
+
+  <div class="chat-body">
+    @for (msg of chatService.mensajes(); track msg.id) {
+        <div class="msg-row" [ngClass]="msg.user_id === currentUserId() ? 'msg-propio' : 'msg-ajeno'">
+        <div class="msg-bubble">
+          <span class="msg-author">{{ msg.nombre_usuario}} {{ msg.apellido_usuario }}</span>
+          <p class="msg-text">{{ msg.contenido }}</p>
+          <span class="msg-time">{{ msg.created_at | date:'HH:mm' }}</span>
+        </div>
+      </div>
+    } @empty {
+      <div class="chat-empty">SALA VACÍA. ENVÍA UN MENSAJE...</div>
+    }
+  </div>
+
+  <form (ngSubmit)="enviar()" class="chat-footer">
+    <input 
+      type="text" 
+      name="nuevoMensaje" 
+      [(ngModel)]="nuevoMensaje" 
+      placeholder="Escribir comando..." 
+      autocomplete="off"
+      required
+    />
+    <button type="submit" [disabled]="!nuevoMensaje.trim()">
+      <i class="bi bi-send-fill"></i>
+    </button>
+  </form>
+</div>

@@ -1,0 +1,218 @@
+/* Contenedor principal adaptable */
+.juego-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 500px; /* Ancho por defecto en móvil */
+  transition: max-width 0.3s ease;
+}
+
+.game-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.game-stats {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* El esqueleto del Layout */
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr; /* Una columna en móvil */
+  gap: 1rem;
+  width: 100%;
+}
+
+.layout-left, .layout-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* SVG Escaneable y Contenedor */
+.svg-wrapper {
+  position: relative;
+  background-color: var(--input);
+  border: 2px solid var(--border);
+  border-radius: var(--bs-border-radius);
+  padding: 15px;
+  margin-bottom: 1rem;
+  box-shadow: inset 0 0 20px #000000;
+}
+
+.ahorcado-svg {
+  background: transparent;
+  display: block;
+}
+
+.horca-estructura,
+.horca-cuerda,
+.monigote,
+.monigote-critico {
+  stroke-linecap: round;
+  fill: none;
+}
+
+.horca-estructura {
+  stroke: #00ffff;
+  stroke-width: 5;
+  filter: drop-shadow(0 0 4px #00ffff) drop-shadow(0 0 15px #00ffff);
+}
+
+.horca-cuerda {
+  stroke: #ff007f;
+  stroke-width: 4;
+  stroke-dasharray: 4 2;
+  filter: drop-shadow(0 0 4px #ff007f) drop-shadow(0 0 12px #ff007f);
+}
+
+.monigote {
+  stroke: #00ffff;
+  stroke-width: 5;
+  filter: drop-shadow(0 0 5px #00ffff) drop-shadow(0 0 18px #00ffff);
+}
+
+.monigote-critico {
+  stroke: #ff0033;
+  stroke-width: 6;
+  filter: drop-shadow(0 0 6px #ff0033) drop-shadow(0 0 22px #ff0033);
+}
+
+.status-errores {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Palabra Oculta */
+.word-display {
+  display: flex;
+  flex-wrap: wrap; /* Evita que se rompa en pantallas muy chicas */
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0 1.5rem 0;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+}
+
+.word-letter {
+  color: var(--muted-foreground);
+  border-bottom: 3px solid var(--border);
+  min-width: 22px;
+  text-align: center;
+  transition: border-color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.word-letter.revealed {
+  color: #00ffff;
+  border-bottom-color: #00ffff;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+}
+
+/* Teclado Virtual (Optimizado para touch móvil, 7 columnas) */
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.35rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.btn-key {
+  background: var(--input);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--bs-border-radius);
+  padding: 0.6rem 0; /* Un poco más alto para facilitar el touch */
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-key:hover:not(:disabled) {
+  background: transparent;
+  border-color: #00ffff;
+  color: #00ffff;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+}
+
+.btn-key:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  border-color: transparent;
+}
+
+/* Botonera inferior */
+.acciones {
+  width: 100%;
+}
+
+.btn-gaming {
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  padding: 0.6rem 1rem;
+  border-radius: var(--bs-border-radius);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+  box-shadow: inset 0 0 5px oklch(0.70 0.22 330 / 0.2);
+}
+
+.btn-outline:hover {
+  background: var(--neon-pink);
+  color: var(--background);
+  font-weight: bold;
+  box-shadow: 0 0 15px oklch(0.70 0.22 330 / 0.5);
+}
+
+/* ==========================================================================
+   MEDIA QUERY: PANTALLAS GRANDES (A partir de tablets horizontales y PCs)
+   ========================================================================== */
+@media (min-width: 768px) {
+  .juego-container {
+    max-width: 850px; /* Expandimos la tarjeta general */
+    padding: 2.5rem;
+  }
+
+  .game-layout {
+    grid-template-columns: 220px 1fr; /* El dibujo fijo a la izquierda, teclado toma el resto */
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .layout-left {
+    align-items: flex-start; /* Alinea el SVG a la izquierda */
+  }
+
+  .layout-right {
+    align-items: flex-start; /* Alinea los controles a la izquierda */
+  }
+
+  .word-display {
+    margin-top: 0; /* Aprovecha el espacio superior alineado al SVG */
+    justify-content: flex-start;
+    font-size: 2rem;
+  }
+
+  .keyboard {
+    grid-template-columns: repeat(9, 1fr); /* En PC se ve mejor con menos filas y más columnas (9 por fila) */
+    gap: 0.5rem;
+  }
+}

@@ -1,0 +1,194 @@
+.game-chat-box {
+  background: var(--card);
+  border: 2px solid var(--neon-cyan);
+  border-radius: var(--bs-border-radius);
+  box-shadow: 0 4px 20px oklch(0.10 0.02 260 / 0.5);
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  width: 380px;
+  overflow: hidden;
+}
+
+.chat-header {
+  background: oklch(0.25 0.022 260);
+  padding: 12px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.chat-title {
+  color: var(--neon-cyan);
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 8px oklch(0.75 0.18 195 / 0.5);
+}
+
+.btn-close-chat {
+  background: transparent;
+  border: none;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-close-chat:hover {
+  color: var(--neon-pink);
+}
+
+.chat-body {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--background);
+}
+
+/* ==========================================================================
+   📦 CONTROL DE BURBUJAS Y ALINEACIÓN (REVISADO)
+   ========================================================================== */
+.msg-row {
+  display: flex;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.msg-bubble {
+  max-width: 85%;
+  padding: 8px 12px;
+  border-radius: var(--bs-border-radius);
+  display: flex;
+  flex-direction: column;
+}
+
+.msg-author {
+  font-size: 10px;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.msg-text {
+  font-size: 13px;
+  margin: 0;
+  color: var(--foreground);
+  word-break: break-word;
+}
+
+.msg-time {
+  font-size: 9px;
+  align-self: flex-end;
+  color: var(--muted-foreground);
+  margin-top: 2px;
+}
+
+/* 🟢 MIS MENSAJES: Se mandan a la derecha y adoptan el Cyan Neón */
+.msg-propio {
+  justify-content: flex-end; /* Alinea el contenido a la derecha */
+}
+
+.msg-propio .msg-bubble {
+  background: oklch(0.75 0.18 195 / 0.15); /* Fondo Cyan tenue */
+  border: 2px solid var(--neon-cyan);
+  border-bottom-right-radius: 2px; /* Punta de burbuja tradicional */
+}
+
+.msg-propio .msg-author {
+  color: var(--neon-cyan);
+  text-align: right;
+}
+
+.msg-propio .msg-text {
+  text-align: right;
+}
+
+/* 🔴 MENSAJES AJENOS: Se quedan a la izquierda y adoptan el Pink Neón */
+.msg-ajeno {
+  justify-content: flex-start; /* Alinea el contenido a la izquierda */
+}
+
+.msg-ajeno .msg-bubble {
+  background: oklch(0.70 0.22 330 / 0.15); /* Fondo Pink tenue */
+  border: 2px solid var(--neon-pink);
+  border-bottom-left-radius: 2px;
+}
+
+.msg-ajeno .msg-author {
+  color: var(--neon-pink);
+  text-align: left;
+}
+
+.msg-ajeno .msg-text {
+  text-align: left;
+}
+
+/* ========================================================================== */
+
+.chat-empty {
+  text-align: center;
+  margin: auto;
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+
+.chat-footer {
+  display: flex;
+  padding: 10px;
+  background: oklch(0.25 0.022 260);
+  border-top: 1px solid var(--border);
+  gap: 8px;
+}
+
+.chat-footer input {
+  flex: 1;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: var(--foreground);
+  font-size: 12px;
+}
+
+.chat-footer input:focus {
+  outline: none;
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 8px oklch(0.75 0.18 195 / 0.4);
+}
+
+.chat-footer button {
+  background: var(--neon-cyan);
+  color: var(--primary-foreground);
+  border: none;
+  padding: 0 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.chat-footer button:disabled {
+  background: var(--muted);
+  color: var(--muted-foreground);
+  cursor: not-allowed;
+}
+
+@media (max-width: 576px) {
+  .game-chat-box {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+  
+  .chat-header {
+    padding: 16px;
+  }
+  
+  .chat-footer {
+    padding: 12px 16px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+}
