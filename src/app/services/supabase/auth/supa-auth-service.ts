@@ -7,7 +7,6 @@ import { SUPABASE_CLIENT } from '../token/supabase.token';
 export class SupaAuthService {
   private supabase = inject(SUPABASE_CLIENT);
 
-  // Estado de loading inicializado en true
   isLoadingSignal = signal<boolean>(true);
 
   currentUserSignal = signal<{ isLoggedIn: boolean; username: string }>({
@@ -21,7 +20,6 @@ export class SupaAuthService {
 
   private initAuthListener() {
     this.supabase.auth.onAuthStateChange((event, session) => {
-
       if (session?.user) {
         this.loadExtendedUserData(session.user.id, session.user.email || 'Usuario');
       } else {

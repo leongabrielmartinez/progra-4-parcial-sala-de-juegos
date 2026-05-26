@@ -1,6 +1,5 @@
-import { Component, inject, OnInit, signal, effect } from '@angular/core'; // Añadimos effect
+import { Component, inject, computed } from '@angular/core'; 
 import { SupaAuthService } from '../../../services/supabase/auth/supa-auth-service';
-import { ChatService } from '../../../services/supabase/chat/chat-service';
 import { Dialog } from '@angular/cdk/dialog';
 import { ModalChat } from '../modal-chat/modal-chat';
 import { CommonModule } from '@angular/common';
@@ -11,22 +10,14 @@ import { CommonModule } from '@angular/common';
   templateUrl: './sticky-chat.html',
   styleUrl: './sticky-chat.css',
 })
-export class StickyChat implements OnInit {
+export class StickyChat {
   private supabaseService = inject(SupaAuthService);
   private dialog = inject(Dialog);
   
-  currentUserId = signal<string | null>(null);
-
-  async ngOnInit() {
-    const session = await this.supabaseService.getSession();
-  
-    if (session?.user) {
-      this.currentUserId.set(session.user.id);
-    } 
-  }
+  isUserLoggedIn = computed(() => this.supabaseService.currentUserSignal().isLoggedIn);
 
   abrirChat() {
-    const dialogRef = this.dialog.open(ModalChat, {
+    this.dialog.open(ModalChat, {
       hasBackdrop: false,
       panelClass: 'modal-chat-contenedor' 
     });
