@@ -53,10 +53,15 @@ Durante este tercer sprint se implementará el núcleo de entretenimiento intera
 * **Condiciones de Finalización:** Programación de flujos de control estrictos con interfaces explícitas (utilizando modales en lugar de alerts) que definen mecánicas claras de victoria y derrota para cada juego.
 ---
 
-### ⏳ Sprint #4 (Próximamente)
-* **Estado:** *Pendiente de desarrollo*
-* **Alcance planificado:** Construcción e integración de la *Sala de Chat Global* con suscripción activa a eventos en tiempo real (Base de Datos Realtime) diferenciando mensajes propios y ajenos con marcas de tiempo explícitas. Desarrollo del juego *Preguntados* consumiendo bancos de preguntas externos mediante APIs públicas. Codificación lógica jugable del *Juego Propio* con guardado de métricas de desempeño y generación de pantallas globales de tablas de *Resultados*.
+### 🔹 Sprint #4 
+Durante este cuarto sprint se consolidará el ecosistema completo de la aplicación mediante la integración de servicios web externos, la incorporación del software lúdico original y el despliegue del sistema centralizado de auditoría de puntajes:
 
+* **Juego "Preguntados" por Consumo de API:** Desarrollo de una trivia interactiva cuya base de datos de preguntas y respuestas se obtenga de forma dinámica mediante peticiones asíncronas a una API externa (admite configuraciones en idioma inglés). La selección de las opciones por parte del usuario se gestionará estrictamente a través de un panel de botones en la interfaz.
+* **Implementación del Juego Propio:** Codificación e integración del juego original diseñado por el alumno (excluyendo de forma taxativa los sistemas de Tatetí, Memotest o Piedra, Papel o Tijeras). Sus mecánicas, reglas particulares y justificación de elección deberán quedar debidamente documentadas en la sección de presentación de la aplicación.
+* **Persistencia Avanzada de Desempeño:** Extensión de los servicios de almacenamiento en el servidor (Supabase o Firebase) para registrar los datos finales de las nuevas actividades incorporadas en el sprint. Esto incluye la cantidad de preguntas acertadas en la trivia, así como los indicadores específicos que midan la destreza en el juego propio (como puntajes acumulados o tiempos exactos de resolución).
+* **Módulo Centralizado de Resultados:** Creación y ruteo de la interfaz gráfica dedicada exclusivamente a la visualización del rendimiento histórico de la comunidad de jugadores.
+* **Tablas de Posiciones Competitivas:** Diseño de 4 estructuras de datos tabulares independientes (una para cada juego de la plataforma) que listen en detalle el historial de partidas, organizando la información de los usuarios en una jerarquía estricta que ordene de forma decreciente desde el mejor desempeño o puntaje alcanzado hasta el peor.
+* **Uniformidad e Identidad Visual:** Asegurar que las nuevas pantallas y elementos interactivos sigan el diseño trabajado, estético y uniforme establecido a lo largo de toda la experiencia de usuario de la sala de juegos, utilizando de forma correcta animaciones y modales informativos integrados.
 ---
 
 ### ⏳ Sprint #5 (Opcional / Recuperatorio)
