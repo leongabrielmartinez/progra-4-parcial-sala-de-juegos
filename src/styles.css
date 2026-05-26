@@ -120,3 +120,28 @@ html {
   box-shadow: 0 8px 30px oklch(0.75 0.18 195 / 0.3), 0 0 15px oklch(0.75 0.18 195 / 0.1);
   transform: translateY(-4px);
 }
+
+/* Contenedor del CDK personalizado */
+.modal-chat-contenedor {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  position: fixed !important;
+  bottom: 90px;
+  right: 20px;
+  z-index: 9998;
+}
+
+/* Forzar la pantalla completa responsiva en móviles */
+@media (max-width: 576px) {
+  .modal-chat-contenedor {
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+  }
+}
