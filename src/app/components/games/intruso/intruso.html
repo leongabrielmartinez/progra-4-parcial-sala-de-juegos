@@ -1,1 +1,43 @@
-<p>intruso works!</p>
+<div class="juego-container game-card"> <div class="game-header">
+    <h2 class="neon-text orbitron-font">EL INTRUSO</h2>
+    <div class="game-stats">
+      <span>Nivel: <span class="text-bold">{{ currentLevel() }}/10</span></span>
+      <span>Tiempo: <span class="text-bold" [class.text-danger]="timeLeft() <= 4">{{ timeLeft() }}s</span></span>
+      <span>Puntos: <span class="text-bold">{{ score() }}</span></span>
+    </div>
+  </div>
+
+  <hr class="neon-border-line">
+
+  @if (isLoading()) {
+    <div class="layout-loading">
+      <p class="animate-glow text-center">Preparando la cuadrícula del mapa...</p>
+    </div>
+  } @else {
+    <div class="game-layout">
+
+      <div class="grid-board-wrapper">
+        <div 
+          class="intruso-grid" 
+          [style.grid-template-columns]="'repeat(' + gridSize() + ', 1fr)'">
+          
+          @for (item of casilleros(); track item.id) {
+            <button 
+              class="btn-casillero-figura animate-fade-in" 
+              (click)="seleccionarCasillero(item)">
+              <span class="emoji-render">{{ item.emoji }}</span>
+            </button>
+          }
+
+        </div>
+      </div>
+
+      <div class="acciones mt-4">
+        <button class="btn-gaming btn-outline" (click)="startNewGame()">
+          Reiniciar Partida
+        </button>
+      </div>
+
+    </div>
+  }
+</div>

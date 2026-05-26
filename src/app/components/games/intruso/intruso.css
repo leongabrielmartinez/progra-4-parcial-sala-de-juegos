@@ -1,0 +1,175 @@
+/* ==========================================================================
+   Estructura Base del Tablero 
+   ========================================================================== */
+.juego-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  transition: max-width 0.3s ease;
+}
+
+.game-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.game-stats {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.neon-border-line {
+  width: 100%;
+  border: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+
+.game-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1.2rem;
+}
+
+.instruction-box {
+  background-color: var(--input);
+  border: 1px dashed var(--border);
+  padding: 0.75rem 1rem;
+  border-radius: var(--bs-border-radius);
+}
+
+.instruction-text {
+  font-size: 0.9rem;
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Cuadrícula Adaptable de Figuras (Optimizado para Grillas de hasta 7x7)
+   ========================================================================== */
+.grid-board-wrapper {
+  position: relative;
+  background-color: #0d0e12;
+  border: 2px solid var(--border);
+  border-radius: var(--bs-border-radius);
+  padding: 15px; /* Reducido ligeramente para dar más espacio a los casilleros */
+  box-shadow: inset 0 0 20px #000000, 0 0 15px rgba(0, 255, 255, 0.1);
+  min-height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intruso-grid {
+  display: grid;
+  gap: 0.4rem; /* Gap más pequeño para que entren grillas densas como la 7x7 */
+  width: 100%;
+  max-width: 350px; /* Ancho máximo balanceado para móviles */
+  margin: 0 auto;
+}
+
+/* Botones de la Grilla (Figuras) */
+.btn-casillero-figura {
+  background: #1a1d24;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  aspect-ratio: 1 / 1; /* Sigue garantizando proporciones cúbicas exactas */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-casillero-figura:hover {
+  border-color: #00ffff;
+  background: transparent;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  transform: scale(1.03);
+}
+
+.emoji-render {
+  font-size: 1.4rem; /* Optimizado para que los emojis no se encimen en grilla 7x7 */
+  user-select: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* ==========================================================================
+   Botonera de Control Inferior Cyberpunk
+   ========================================================================== */
+.acciones {
+  width: 100%;
+}
+
+.btn-gaming {
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  border-radius: var(--bs-border-radius);
+  border: 2px solid;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+}
+
+.btn-outline:hover {
+  background: var(--neon-pink);
+  color: #000;
+  font-weight: bold;
+  box-shadow: 0 0 15px var(--neon-pink);
+}
+
+.text-danger {
+  color: var(--neon-pink) !important;
+  text-shadow: 0 0 8px var(--neon-pink);
+}
+
+.layout-loading {
+  padding: 3rem 0;
+  width: 100%;
+}
+
+/* Animación de aparición de los casilleros */
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Ajustes para pantallas de tablets y computadoras */
+@media (min-width: 768px) {
+  .juego-container {
+    max-width: 600px;
+    padding: 2.5rem;
+  }
+  .intruso-grid {
+    max-width: 400px;
+    gap: 0.5rem;
+  }
+  .emoji-render {
+    font-size: 1.6rem; /* Incrementado sutilmente solo si hay espacio en PC */
+  }
+}
