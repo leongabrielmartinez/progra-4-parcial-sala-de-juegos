@@ -43,10 +43,14 @@ Durante este segundo sprint se implementó el motor de autenticación completo y
 
 ---
 
-### ⏳ Sprint #3 (Próximamente)
-* **Estado:** *Pendiente de desarrollo*
-* **Alcance planificado:** Desarrollo interactivo del juego *Ahorcado* mediante comandos de interfaz exclusivos por botones (sin teclado físico). Desarrollo del juego de naipes *Mayor o Menor* evaluando adivinación de secuencias numéricas de barajas. Integración de la persistencia de estadísticas básicas en base de datos al finalizar cada sesión de juego.
-
+### 🔹 Sprint #3 
+Durante este tercer sprint se implementará el núcleo de entretenimiento interactivo y el sistema global de comunicación en tiempo real:
+* **Juego "Ahorcado" por Interfaz:** Desarrollo del motor del juego utilizando un panel interactivo con botones dedicados para cada letra del abecedario. La entrada de datos queda estrictamente restringida a clics en la interfaz de usuario, inhabilitando de forma deliberada el uso del teclado físico.
+* **Juego de Naipes "Mayor o Menor":** Implementación de la lógica probabilística basada en una baraja de cartas, donde el usuario debe predecir secuencialmente si el siguiente naipe será numéricamente superior o inferior al visible.
+* **Sala de Chat Global y Reactiva:** Creación de una única interfaz de mensajería unificada accesible únicamente para usuarios autenticados y logueados. La plataforma estará vinculada a una suscripción activa del servicio de base de datos en tiempo real, garantizando que los mensajes enviados se rendericen automáticamente en todos los clientes conectados sin necesidad de recargar la página.
+* **Persistencia de Métricas y Mensajes:** Diseño e integración de servicios que guardan en la base de datos la información crítica al finalizar cada partida (vínculo con el ID del jugador, tiempo de finalización, cantidad de letras seleccionadas y volumen de cartas acertadas), así como el almacenamiento de cada mensaje del chat con su emisor y fecha de envío.
+* **Diferenciación Visual en Chat:** Formateo dinámico del flujo de mensajes para estructurar de forma clara quién envía el contenido y la hora exacta de emisión, aplicando estilos diferenciados en la burbuja de chat para que el mensaje propio se distinga visualmente del resto.
+* **Condiciones de Finalización:** Programación de flujos de control estrictos con interfaces explícitas (utilizando modales en lugar de alerts) que definen mecánicas claras de victoria y derrota para cada juego.
 ---
 
 ### ⏳ Sprint #4 (Próximamente)
