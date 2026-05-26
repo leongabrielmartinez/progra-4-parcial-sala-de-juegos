@@ -1,19 +1,45 @@
-<div style="padding: 20px; font-family: Arial, sans-serif;">
-  <h2>Testeo de Preguntas de la API</h2>
-  <hr>
+<div class="juego-container game-card animate-float">
+  <div class="game-header">
+    <h2 class="neon-text orbitron-font">PREGUNTADOS</h2>
+    <div class="game-stats">
+      <span>Ronda: <span class="text-bold">{{ currentRound() }}/10</span></span>
+      <span>Tiempo: <span class="text-bold" [class.text-danger]="timeLeft() <= 5">{{ timeLeft() }}s</span></span>
+      <span>Puntos: <span class="text-bold">{{ score() }}</span></span>
+    </div>
+  </div>
 
-  @if (preguntas.length > 0) {
-    @for (item of preguntas; track $index) {
-      <div style="margin-bottom: 25px; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
-        <p><strong>Pregunta N°:</strong> {{ $index + 1 }}</p>
-        <p><strong>Categoría:</strong> {{ item.category }}</p>
-        <p><strong>Dificultad:</strong> {{ item.difficulty }}</p>
-        <p><strong>Enunciado:</strong> <span [innerHTML]="item.question"></span></p>
-        <p style="color: green;"><strong>Respuesta Correcta:</strong> {{ item.correct_answer }}</p>
-        <p style="color: red;"><strong>Respuestas Incorrectas:</strong> {{ item.incorrect_answers.join(', ') }}</p>
-      </div>
-    }
+  <hr class="neon-border-line">
+
+  @if (isLoading()) {
+    <div class="layout-loading">
+      <p class="animate-glow text-center">Conectando con la API y preparando la partida...</p>
+    </div>
   } @else {
-    <p>Conectando con la API pública y trayendo preguntas...</p>
+    <div class="game-layout">
+      
+      <div class="question-box">
+        <p class="question-text">{{ currentQuestionText() }}</p>
+      </div>
+
+      <div class="action-buttons">
+        @for (answer of shuffledAnswers(); track $index) {
+          <button 
+            class="btn-gaming"
+            [ngClass]="$index % 2 === 0 ? 'btn-higher' : 'btn-lower'"
+            (click)="handleAnswerSelection(answer)">
+            {{ answer }}
+          </button>
+        }
+      </div>
+
+      <span>Errores: <span class="text-bold" [class.text-danger]="errors() >= 2">{{ errors() }}/3</span></span>
+
+      <div class="acciones mt-4">
+        <button class="btn-gaming btn-outline" (click)="startNewGame()">
+          Reiniciar Partida
+        </button>
+      </div>
+
+    </div>
   }
 </div>
