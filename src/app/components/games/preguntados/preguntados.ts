@@ -31,7 +31,7 @@ export class Preguntados implements OnInit, OnDestroy {
   timeLeft = signal<number>(TIME_PER_QUESTION);
   currentRound = signal<number>(1);
   score = signal<number>(0);
-  errors = signal<number>(0); // <--- Nuevo Signal para controlar los errores en tiempo real
+  errors = signal<number>(0); 
   
   currentQuestionText = signal<string>('');
   currentCategory = signal<string>('');
@@ -69,7 +69,7 @@ export class Preguntados implements OnInit, OnDestroy {
   startNewGame() {
     this.score.set(0);
     this.currentRound.set(1);
-    this.errors.set(0); // <-- Reseteamos el contador de errores
+    this.errors.set(0);
     this.isGameOver = false;
     this.totalCorrectAnswers = 0;
     this.totalFailedAnswers = 0;
@@ -112,7 +112,7 @@ export class Preguntados implements OnInit, OnDestroy {
   }
 
   handleAnswerSelection(selectedAnswer: string, clickeado: boolean = true) {
-    if (this.isGameOver) return; // Protege de clicks fantasmas o retrasados
+    if (this.isGameOver) return; 
 
     this.stopTimer();
     this.totalTimeUsed += (TIME_PER_QUESTION - this.timeLeft());
@@ -122,7 +122,7 @@ export class Preguntados implements OnInit, OnDestroy {
       this.totalCorrectAnswers++;
     } else {
       this.totalFailedAnswers++;
-      this.errors.update(e => e + 1); // <--- Incrementamos el Signal de errores
+      this.errors.update(e => e + 1);
     }
 
     // Solo avanzamos si el efecto reactivo no gatilló el fin del juego por llegar a 3 errores
@@ -136,7 +136,7 @@ export class Preguntados implements OnInit, OnDestroy {
         this.isGameOver = true;
         this.finalizarJuego(true); // Pasó las 10 rondas exitosamente
       }
-    }, 50); // Pequeño delay de sincronización para que el effect procese primero si hubo derrota
+    }, 50);
   }
 
   async finalizarJuego(ganoPartida: boolean) {

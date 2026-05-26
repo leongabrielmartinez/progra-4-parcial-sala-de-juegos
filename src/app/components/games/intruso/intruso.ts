@@ -75,7 +75,7 @@ export class Intruso implements OnInit, OnDestroy {
     this.score.set(0);
     this.currentLevel.set(1);
     this.gridSize.set(3); 
-    this.casilleros.set([]); // <-- Clave: Vaciar la grilla inmediatamente para que no queden remanentes
+    this.casilleros.set([]); 
     this.totalTimeUsed = 0;
     this.failedClicksCount = 0;
     
@@ -84,16 +84,15 @@ export class Intruso implements OnInit, OnDestroy {
     setTimeout(() => {
       this.initLevel();
       this.isLoading.set(false);
-    }, 200); // Reducido ligeramente para mayor dinamismo
+    }, 200); 
   }
 
   initLevel() {
     if (this.isGameOver) return;
 
-    this.stopTimer(); // Asegurar que no se solapen intervalos al cambiar de nivel
+    this.stopTimer();
     this.timeLeft.set(TIME_PER_LEVEL);
 
-    // ESCALADO LINEAL REFINADO (Evita saltos e imprecisiones numéricas):
     // Cada 2 niveles incrementa 1 fila/columna de forma suave.
     const nivelActual = this.currentLevel();
     const nuevaDimension = 3 + Math.floor((nivelActual - 1) / 2);
@@ -128,7 +127,7 @@ export class Intruso implements OnInit, OnDestroy {
   seleccionarCasillero(casillero: CasilleroFigura) {
     if (this.isGameOver) return;
 
-    this.stopTimer(); // Detener el tiempo en el instante que hace clic
+    this.stopTimer();
     const tiempoGastadoEnNivel = TIME_PER_LEVEL - this.timeLeft();
     this.totalTimeUsed += tiempoGastadoEnNivel;
 
@@ -150,7 +149,7 @@ export class Intruso implements OnInit, OnDestroy {
   }
 
   async finalizarJuego(completoVictoria: boolean) {
-    this.stopTimer(); // Asegurar doble protección contra hilos huérfanos
+    this.stopTimer(); 
 
     const datosPartida: ResultDataIntruso = {
       nivel_alcanzado: this.currentLevel(),
