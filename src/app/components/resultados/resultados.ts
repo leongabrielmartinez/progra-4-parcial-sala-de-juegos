@@ -34,50 +34,50 @@ export class Resultados implements OnInit {
 
     try {
       if (juego === 'Ahorcado') {
-        // Ordenado por: 1° los que ganaron, 2° menor cantidad de letras falladas, 3° más tiempo sobrante
         const { data, error } = await this.supabase
           .from('resultados_ahorcado')
           .select('*')
           .order('gano', { ascending: false })
           .order('letras_falladas', { ascending: true })
-          .order('tiempo_sobrante', { ascending: false });
+          .order('tiempo_sobrante', { ascending: false })
+          .limit(5); // 
 
         if (error) throw error;
         this.filasRanking.set(data || []);
       } 
       
       else if (juego === 'Mayor o Menor') {
-        // Ordenado por: Mayor cantidad de cartas acertadas
         const { data, error } = await this.supabase
           .from('resultados_mayor_menor')
           .select('*')
           .order('cartas_acertadas', { ascending: false })
-          .order('tiempo_utilizado', { ascending: true });
+          .order('tiempo_utilizado', { ascending: true })
+          .limit(5); // 
 
         if (error) throw error;
         this.filasRanking.set(data || []);
       } 
       
       else if (juego === 'Preguntados') {
-        // Ordenado por: Mayor número de preguntas acertadas
         const { data, error } = await this.supabase
           .from('resultados_preguntados')
           .select('*')
           .order('preguntas_acertadas', { ascending: false })
-          .order('tiempo_utilizado', { ascending: true });
+          .order('tiempo_utilizado', { ascending: true })
+          .limit(5); // 
 
         if (error) throw error;
         this.filasRanking.set(data || []);
       } 
       
       else if (juego === 'El Intruso') {
-        // Ordenado por: Mayor nivel alcanzado (hasta el 10) y si completó la victoria absoluta
         const { data, error } = await this.supabase
           .from('resultados_intruso')
           .select('*')
           .order('gano', { ascending: false })
           .order('nivel_alcanzado', { ascending: false })
-          .order('tiempo_utilizado', { ascending: true });
+          .order('tiempo_utilizado', { ascending: true })
+          .limit(5); 
 
         if (error) throw error;
         this.filasRanking.set(data || []);
