@@ -21,6 +21,12 @@ export const routes: Routes = [
         loadComponent: () => import('./components/registro/registro').then(m => m.Registro),
         canActivate: [userExistGuard] 
     },
+
+    { 
+        path: 'resultados', 
+        loadComponent: () => import('./components/resultados/resultados').then(m => m.Resultados),
+        canActivate: [userNotExistGuard] 
+    },
     {
         path: 'games',
         canActivate: [userNotExistGuard], 
@@ -34,6 +40,14 @@ export const routes: Routes = [
             {
                 path: 'mayor-o-menor',
                 loadComponent: () => import('./components/games/mayor-o-menor/mayor-o-menor').then(m => m.MayorMenor)
+            },
+            {
+                path: 'preguntados',
+                loadComponent: () => import('./components/games/preguntados/preguntados').then(m => m.Preguntados)
+            },
+            {
+                path: 'intruso',
+                loadComponent: () => import('./components/games/intruso/intruso').then(m => m.Intruso)
             },
         ]
     },

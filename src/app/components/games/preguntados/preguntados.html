@@ -1,0 +1,45 @@
+<div class="juego-container game-card animate-float">
+  <div class="game-header">
+    <h2 class="neon-text orbitron-font">PREGUNTADOS</h2>
+    <div class="game-stats">
+      <span>Ronda: <span class="text-bold">{{ currentRound() }}/10</span></span>
+      <span>Tiempo: <span class="text-bold" [class.text-danger]="timeLeft() <= 5">{{ timeLeft() }}s</span></span>
+      <span>Puntos: <span class="text-bold">{{ score() }}</span></span>
+    </div>
+  </div>
+
+  <hr class="neon-border-line">
+
+  @if (isLoading()) {
+    <div class="layout-loading">
+      <p class="animate-glow text-center">Conectando con la API y preparando la partida...</p>
+    </div>
+  } @else {
+    <div class="game-layout">
+      
+      <div class="question-box">
+        <p class="question-text">{{ currentQuestionText() }}</p>
+      </div>
+
+      <div class="action-buttons">
+        @for (answer of shuffledAnswers(); track $index) {
+          <button 
+            class="btn-gaming"
+            [ngClass]="$index % 2 === 0 ? 'btn-higher' : 'btn-lower'"
+            (click)="handleAnswerSelection(answer)">
+            {{ answer }}
+          </button>
+        }
+      </div>
+
+      <span>Errores: <span class="text-bold" [class.text-danger]="errors() >= 2">{{ errors() }}/3</span></span>
+
+      <div class="acciones mt-4">
+        <button class="btn-gaming btn-outline" (click)="startNewGame()">
+          Reiniciar Partida
+        </button>
+      </div>
+
+    </div>
+  }
+</div>

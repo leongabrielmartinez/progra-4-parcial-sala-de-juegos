@@ -41,7 +41,7 @@ export class Home {
     {
       titulo: 'El Intruso',
       descripcion: 'Encuentra el elemento que no encaja con el resto.',
-      link: '/games/el-intruso',
+      link: '/games/intruso',
       icono: 'bi-incognito',
       esRosa: true
     }
