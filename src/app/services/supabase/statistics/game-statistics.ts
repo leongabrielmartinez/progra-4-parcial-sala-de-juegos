@@ -4,6 +4,7 @@ import { SupaAuthService } from '../auth/supa-auth-service';
 import { ResultDataAhorcado } from '../../../models/games-data/ahorcado-data';
 import { ResultDataMayorMenor } from '../../../models/games-data/mayor-menor-data';
 import { ResultDataPreguntados } from '../../../models/games-data/preguntados-data';
+import { ResultDataIntruso } from '../../../models/games-data/el-intruso-data';
 
 @Injectable({
   providedIn: 'root',
@@ -101,4 +102,34 @@ export class GameStatistics {
       throw error;
     }
   }
+
+  async guardarPartidaIntruso(gameData: ResultDataIntruso): Promise<void> {
+      try {
+        // 1. Validar sesión del usuario autenticado
+        const user = await this.supabaseService.getUser();
+        if (!user) throw new Error('No se encontró una sesión de usuario válida.');
+
+        // 2. Extraer el nombre de usuario del Signal reactivo
+        const fullName = this.supabaseService.currentUserSignal().username;
+
+        // 3. Insertar datos en la tabla correspondiente en Supabase
+        const { error } = await this.supabase
+          .from('resultados_intruso') // <--- Recuerda crear esta tabla en tu consola de Supabase
+          .insert([
+            {
+              user_id: user.id,
+              nombre_completo: fullName,
+              nivel_alcanzado: gameData.nivel_alcanzado,
+              gano: gameData.gano,
+              clicks_incorrectos: gameData.clicks_incorrectos,
+              tiempo_utilizado: gameData.tiempo_utilizado
+            }
+          ]);
+
+        if (error) throw error;
+      } catch (error) {
+        console.error('Error al guardar estadísticas de El Intruso:', error);
+        throw error;
+      }
+    }
 }

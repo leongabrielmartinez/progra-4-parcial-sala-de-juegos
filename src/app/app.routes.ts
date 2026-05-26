@@ -39,6 +39,10 @@ export const routes: Routes = [
                 path: 'preguntados',
                 loadComponent: () => import('./components/games/preguntados/preguntados').then(m => m.Preguntados)
             },
+            {
+                path: 'intruso',
+                loadComponent: () => import('./components/games/intruso/intruso').then(m => m.Intruso)
+            },
         ]
     },
 
