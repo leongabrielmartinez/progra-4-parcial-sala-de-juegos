@@ -21,6 +21,12 @@ export const routes: Routes = [
         loadComponent: () => import('./components/registro/registro').then(m => m.Registro),
         canActivate: [userExistGuard] 
     },
+
+    { 
+        path: 'resultados', 
+        loadComponent: () => import('./components/resultados/resultados').then(m => m.Resultados),
+        canActivate: [userNotExistGuard] 
+    },
     {
         path: 'games',
         canActivate: [userNotExistGuard], 

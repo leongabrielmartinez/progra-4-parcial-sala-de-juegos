@@ -1,0 +1,203 @@
+/* ==========================================================================
+   Contenedor y Cabecera Estática
+   ========================================================================== */
+.juego-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 750px;
+}
+
+.game-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.subtitle-text {
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  margin: 0.2rem 0 0 0;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-white {
+  color: var(--foreground);
+}
+
+.text-cyan {
+  color: #00ffff;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.2);
+}
+
+.text-pink {
+  color: var(--neon-pink);
+  text-shadow: 0 0 8px rgba(244, 63, 94, 0.2);
+}
+
+.neon-border-line {
+  width: 100%;
+  border: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+
+.game-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+/* ==========================================================================
+   Botonera Superior (4 Juegos)
+   ========================================================================== */
+.navigation-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Cuadrícula 2x2 para pantallas chicas */
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.btn-nav {
+  background: var(--input);
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
+  padding: 0.65rem 0.5rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.btn-nav:hover {
+  border-color: var(--primary);
+  color: var(--foreground);
+}
+
+.btn-nav.active {
+  background: transparent;
+  border-color: #00ffff;
+  color: #00ffff;
+  box-shadow: inset 0 0 8px rgba(0, 255, 255, 0.15), 0 0 10px rgba(0, 255, 255, 0.2);
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   Tabla Estilizada Gaming
+   ========================================================================== */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Desplazamiento seguro en teléfonos móviles */
+  background-color: #0d0e12;
+  border: 2px solid var(--border);
+  border-radius: var(--bs-border-radius);
+  box-shadow: inset 0 0 20px #000000;
+}
+
+.gaming-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  text-align: left;
+  min-width: 550px;
+}
+
+.gaming-table th {
+  background-color: #15171e;
+  color: var(--muted-foreground);
+  padding: 0.85rem 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--border);
+}
+
+.gaming-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: var(--muted-foreground);
+  vertical-align: middle;
+}
+
+.gaming-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.top-player {
+  background-color: rgba(0, 255, 255, 0.01);
+}
+
+.index-col {
+  font-size: 1rem;
+}
+
+/* ==========================================================================
+   Utilidades e Indicadores de Carga
+   ========================================================================== */
+.no-data-box {
+  background-color: #0d0e12;
+  border: 1px dashed var(--border);
+  padding: 2.5rem 1rem;
+  border-radius: var(--bs-border-radius);
+}
+
+.acciones {
+  width: 100%;
+}
+
+.btn-gaming {
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  border-radius: var(--bs-border-radius);
+  border: 2px solid;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+}
+
+.btn-outline:hover {
+  background: var(--neon-pink);
+  color: #000;
+  font-weight: bold;
+  box-shadow: 0 0 12px var(--neon-pink);
+}
+
+.layout-loading {
+  padding: 4rem 0;
+  width: 100%;
+}
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* ==========================================================================
+   Media Query para Computadoras y Tablets
+   ========================================================================== */
+@media (min-width: 768px) {
+  .juego-container {
+    padding: 2.5rem;
+  }
+
+  .navigation-tabs {
+    grid-template-columns: repeat(4, 1fr); /* Se transforma en una fila horizontal de 4 botones perfectos */
+    gap: 0.75rem;
+  }
+}
