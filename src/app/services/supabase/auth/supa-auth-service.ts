@@ -9,9 +9,10 @@ export class SupaAuthService {
 
   isLoadingSignal = signal<boolean>(true);
 
-  currentUserSignal = signal<{ isLoggedIn: boolean; username: string }>({
+  currentUserSignal = signal<{ isLoggedIn: boolean; username: string; rol: string }>({
     isLoggedIn: false,
-    username: ''
+    username: '',
+    rol: 'usuario' 
   });
 
   constructor() {
@@ -25,7 +26,8 @@ export class SupaAuthService {
       } else {
         this.currentUserSignal.set({
           isLoggedIn: false,
-          username: ''
+          username: '',
+          rol: 'usuario' 
         });
         this.isLoadingSignal.set(false);
       }
@@ -44,13 +46,15 @@ export class SupaAuthService {
       
       this.currentUserSignal.set({
         isLoggedIn: true,
-        username: fullName
+        username: fullName,
+        rol: userData?.rol || 'usuario' // <--- Esto capturará perfectamente el rol del JOIN
       });
     } catch (e) {
       console.error('Error crítico en loadExtendedUserData:', e);
       this.currentUserSignal.set({
         isLoggedIn: true,
-        username: defaultEmail
+        username: defaultEmail,
+        rol: 'usuario'
       });
     } finally {
       this.isLoadingSignal.set(false);
@@ -87,17 +91,34 @@ export class SupaAuthService {
 
   async getDataUser(userId: string) {
     try {
-      const { data, error } = await this.supabase
+      // 1. Buscamos de forma independiente los datos en la tabla 'usuarios'
+      const userQuery = await this.supabase
         .from('usuarios')
         .select('nombre, apellido, edad')
         .eq('id', userId)
-        .single();
+        .maybeSingle(); 
 
-      if (error) {
-        console.error('Error en la consulta de usuarios (posible RLS):', error);
+      // 2. Buscamos de forma independiente el rol en la tabla 'perfiles'
+      const perfilQuery = await this.supabase
+        .from('perfiles')
+        .select('rol')
+        .eq('id', userId)
+        .maybeSingle();
+
+      // Si ambas consultas fallan o tiran error de red, reportamos
+      if (userQuery.error && perfilQuery.error) {
+        console.error('Error al traer datos del usuario y perfil:', userQuery.error, perfilQuery.error);
         return null;
       }
-      return data;
+
+      // 3. Unificamos las respuestas en un solo objeto plano y limpio para Angular
+      return {
+        nombre: userQuery.data?.nombre || '',
+        apellido: userQuery.data?.apellido || '',
+        edad: userQuery.data?.edad || null,
+        rol: perfilQuery.data?.rol || 'usuario' 
+      };
+
     } catch (err) {
       console.error('Error de red o conexión al buscar usuario:', err);
       return null;

@@ -4,6 +4,7 @@ import { Home } from './components/home/home';
 import { QuienSoy } from './components/quien-soy/quien-soy';
 import { userExistGuard } from './guards/user-exist-guard';
 import { userNotExistGuard } from './guards/user-not-exist-guard';
+import { userIsAdminGuard } from './guards/user-is-admin-guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -26,6 +27,16 @@ export const routes: Routes = [
         path: 'resultados', 
         loadComponent: () => import('./components/resultados/resultados').then(m => m.Resultados),
         canActivate: [userNotExistGuard] 
+    },
+    { 
+        path: 'encuesta', 
+        loadComponent: () => import('./components/encuesta/encuesta').then(m => m.Encuesta),
+        canActivate: [userNotExistGuard] 
+    },
+    {
+        path: 'estadisticas',
+        loadComponent: () => import('./components/estadisticas-admin/estadisticas-admin').then(m => m.EstadisticasAdmin),
+        canActivate: [userIsAdminGuard] 
     },
     {
         path: 'games',

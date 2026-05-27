@@ -14,10 +14,14 @@ export class Header {
 
   isLoggedIn = computed(() => this.supabaseService.currentUserSignal().isLoggedIn);
   username = computed(() => this.supabaseService.currentUserSignal().username);
+  
+  // Agrega esta línea para verificar el rol dinámicamente:
+  isAdmin = computed(() => this.supabaseService.currentUserSignal().rol === 'admin');
 
   async logout() {
     try {
       await this.supabaseService.logOut();
+      this.router.navigate(['/login']); // Opcional: redirigir tras salir
     } catch (error) {
       console.error('Error al cerrar sesión desde el header:', error);
     }

@@ -13,7 +13,7 @@ export const userNotExistGuard: CanActivateFn = async (route, state) => {
   if (!session) {
     modalAlertService.showAlert(
       'Sesión no encontrada',
-      'Debes registrarte o iniciar sessión para poder jugar.',
+      'Debes registrarte o iniciar sessión para acceder a esta sección.',
       'info' 
     );
 

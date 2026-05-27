@@ -1,0 +1,296 @@
+.survey-icon-box {
+  width: 54px;
+  height: 54px;
+  background-color: oklch(0.25 0.022 260);
+  border: 1px solid var(--neon-cyan);
+  border-radius: 1rem;
+  font-size: 1.6rem;
+}
+
+.text-cyber-cyan {
+  color: var(--neon-cyan);
+}
+
+.survey-main-title {
+  color: var(--foreground);
+  font-size: 1.85rem;
+  text-shadow: 0 0 12px oklch(0.75 0.18 195 / 0.6);
+}
+
+.survey-subtitle {
+  color: var(--foreground);
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.survey-container {
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--card);
+  border: 2px solid oklch(0.40 0.03 260 / 0.4);
+  border-radius: 1.25rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hover-neon-cyan-glow-fixed:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px oklch(0.75 0.18 195 / 0.5);
+}
+
+.row-gaming {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.input-group-cyber {
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+
+.input-group-cyber input, .input-group-cyber select {
+  width: 100%;
+  padding: 0.85rem 1rem 0.85rem 2.75rem;
+  background-color: oklch(0.25 0.022 260);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.05em;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-group-cyber input:focus, .input-group-cyber select:focus {
+  outline: none;
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 8px oklch(0.75 0.18 195 / 0.4);
+}
+
+.row-gaming .input-group-cyber:last-child input {
+  padding-left: 1rem;
+}
+
+.icon-cyber {
+  position: absolute;
+  left: 1rem;
+  bottom: 0.85rem;
+  color: var(--muted-foreground);
+  font-size: 1.1rem;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.survey-divider {
+  border-bottom: 1px dashed oklch(0.40 0.03 260 / 0.4);
+  width: 100%;
+}
+
+.survey-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ESTILOS RADIO BUTTONS CYBER */
+.cyber-radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.cyber-radio-label input {
+  display: none;
+}
+
+.cyber-radio-label span {
+  padding: 0.4rem 0.8rem;
+  background-color: oklch(0.25 0.022 260);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--muted-foreground);
+  transition: all 0.2s ease;
+}
+
+.cyber-radio-label input:checked + span {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 8px oklch(0.75 0.18 195 / 0.4);
+}
+
+/* ESTILOS DE SELECT CONTROL */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* ESTILOS CHECKBOX CYBER */
+.cyber-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.cyber-checkbox-label input {
+  display: none;
+}
+
+.checkbox-box {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--border);
+  background-color: oklch(0.25 0.022 260);
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.cyber-checkbox-label input:checked + .checkbox-box {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 8px oklch(0.75 0.18 195 / 0.4);
+}
+
+.cyber-checkbox-label input:checked + .checkbox-box::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--neon-cyan);
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.checkbox-text {
+  font-size: 0.85rem;
+  color: var(--foreground);
+}
+
+/* BOTÓN DE ENVÍO */
+.btn-survey-gaming {
+  padding: 0.85rem;
+  background-color: var(--neon-cyan);
+  color: oklch(0.15 0.02 195);
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+
+.btn-survey-gaming:hover:not(:disabled) {
+  opacity: 0.95;
+  box-shadow: 0 0 12px oklch(0.75 0.18 195 / 0.5);
+}
+
+.btn-survey-gaming:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* REGLAS DE MENSAJES DE ERROR */
+.error-msg {
+  position: absolute;
+  bottom: -1.1rem;
+  right: 0.25rem;
+  color: #ff5555;
+  font-size: 0.70rem;
+}
+
+.error-msg-block {
+  display: block;
+  margin-top: 0.25rem;
+  color: #ff5555;
+  font-size: 0.70rem;
+}
+
+.error-msg-select {
+  position: absolute;
+  bottom: -1.1rem;
+  right: 0.25rem;
+  color: #ff5555;
+  font-size: 0.70rem;
+}
+
+/* TEXTO DE LA PREGUNTA */
+.checkbox-text {
+  font-size: 0.9rem;
+  color: var(--foreground);
+}
+
+/* CONTENEDOR DEL SWITCH SÍ/NO */
+.cyber-switch-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.switch-label {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+/* EL SWITCH ESTRUCTURAL */
+.cyber-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.cyber-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* EL LLENADO DEL SWITCH */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: oklch(0.25 0.022 260);
+  border: 1px solid var(--border);
+  border-radius: 34px;
+  transition: .3s;
+}
+
+/* EL BOTÓN DESLIZANTE */
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--muted-foreground);
+  border-radius: 50%;
+  transition: .3s;
+}
+
+/* ESTADOS ACTIVOS (CUANDO ES "SÍ") */
+.cyber-switch input:checked + .slider {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 10px oklch(0.75 0.18 195 / 0.4);
+}
+
+.cyber-switch input:checked + .slider::before {
+  transform: translateX(24px);
+  background-color: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan);
+}

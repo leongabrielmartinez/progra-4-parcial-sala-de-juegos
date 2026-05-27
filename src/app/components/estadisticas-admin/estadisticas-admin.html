@@ -1,0 +1,158 @@
+<div class="juego-container game-card">
+  <div class="game-header">
+    <h2 class="neon-text orbitron-font">PANEL DE CONTROL</h2>
+    <p class="subtitle-text">Administración y métricas de satisfacción de los usuarios</p>
+  </div>
+
+  <div class="navigation-tabs-admin">
+    <button class="btn-nav" [class.active]="vistaActiva() === 'tabla'" (click)="cambiarVista('tabla')">
+      📋 Últimas 10 Encuestas
+    </button>
+    <button class="btn-nav" [class.active]="vistaActiva() === 'graficos'" (click)="cambiarVista('graficos')">
+      📊 Gráficos y Métricas
+    </button>
+  </div>
+
+  <hr class="neon-border-line">
+
+  @if (isLoading()) {
+    <div class="layout-loading">
+      <p class="animate-glow text-center">Accediendo a la base de datos de encuestas...</p>
+    </div>
+  } @else {
+    <div class="game-layout">
+      
+      @if (vistaActiva() === 'tabla') {
+        @if (ultimasEncuestas().length === 0) {
+          <div class="no-data-box text-center">
+            <p class="muted-text">Aún no se han registrado encuestas.</p>
+          </div>
+        } @else {
+          <div class="table-container">
+            <table class="gaming-table">
+              <thead>
+                <tr>
+                  <th>Usuario</th>
+                  <th>Nombre Completo</th>
+                  <th class="text-center">Edad</th>
+                  <th>Juego Favorito</th>
+                  <th class="text-center">Fluidez App</th>
+                  <th class="text-center">Recomienda</th>
+                  <th class="text-center">Fecha</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (encuesta of ultimasEncuestas(); track encuesta.id) {
+                  <tr>
+                    <td class="text-bold text-cyan">{{ encuesta.usuario_email }}</td>
+                    <td class="text-white">{{ encuesta.nombre }} {{ encuesta.apellido }}</td>
+                    <td class="text-center">{{ encuesta.edad }}</td>
+                    <td class="text-bold text-white">
+                      @if (encuesta.juego_favorito === 'ahorcado') { 🪓 Ahorcado }
+                      @else if (encuesta.juego_favorito === 'mayor-menor') { 🃏 Mayor o Menor }
+                      @else if (encuesta.juego_favorito === 'preguntados') { ❓ Preguntados }
+                      @else if (encuesta.juego_favorito === 'propio') { 🔍 El Intrus }
+                    </td>
+                    <td class="text-center">
+                      <span class="badge-fluidez" [ngClass]="'fluidez-' + encuesta.fluidez">
+                        {{ encuesta.fluidez | uppercase }}
+                      </span>
+                    </td>
+                    <td class="text-center text-bold" [class.text-cyan]="encuesta.recomienda === 'si'" [class.text-pink]="encuesta.recomienda === 'no'">
+                      {{ encuesta.recomienda | uppercase }}
+                    </td>
+                    <td class="text-center muted-text text-sm">
+                      {{ encuesta.creado_en | date:'dd/MM/yyyy HH:mm' }}
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      }
+
+      @if (vistaActiva() === 'graficos') {
+        <div class="metrics-grid">
+          
+          <div class="metric-card">
+            <h3 class="metric-title">🕹️ Preferencia de Juegos</h3>
+            <div class="bars-container">
+              @for (juego of estadisticasGraficos().juegos; track juego.name) {
+                <div class="bar-group">
+                  <div class="bar-labels">
+                    <span class="text-white">{{ juego.name }}</span>
+                    <span class="text-cyan text-bold">{{ juego.porcentaje }}%</span>
+                  </div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill-cyan" [style.width.%]="juego.porcentaje"></div>
+                  </div>
+                  <div class="bar-votos text-right muted-text">{{ juego.cantidad }} {{ juego.cantidad === 1 ? 'voto' : 'votos' }}</div>
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <h3 class="metric-title">⚡ Fluidez del Sistema</h3>
+            <div class="bars-container">
+              @for (item of estadisticasGraficos().fluidez; track item.name) {
+                <div class="bar-group">
+                  <div class="bar-labels">
+                    <span class="text-white">{{ item.name }}</span>
+                    <span class="text-cyan text-bold">{{ item.porcentaje }}%</span>
+                  </div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill-cyan" [style.width.%]="item.porcentaje"></div>
+                  </div>
+                  <div class="bar-votos text-right muted-text">{{ item.cantidad }} {{ item.cantidad === 1 ? 'voto' : 'votos' }}</div>
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="metric-card full-width-card">
+            <h3 class="metric-title">👍 ¿Recomiendan la plataforma?</h3>
+            <div class="bars-container-horizontal">
+              
+              <div class="bar-group">
+                <div class="bar-labels">
+                  <span class="text-white">Sí, la recomiendan</span>
+                  <span class="text-cyan text-bold">{{ estadisticasGraficos().recomendacion.si_porcentaje }}%</span>
+                </div>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill-cyan" [style.width.%]="estadisticasGraficos().recomendacion.si_porcentaje"></div>
+                </div>
+                <div class="bar-votos text-right muted-text">{{ estadisticasGraficos().recomendacion.si_cantidad }} usuarios</div>
+              </div>
+
+              <div class="bar-group">
+                <div class="bar-labels">
+                  <span class="text-white">No la recomiendan</span>
+                  <span class="text-pink text-bold">{{ estadisticasGraficos().recomendacion.no_porcentaje }}%</span>
+                </div>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill-pink" [style.width.%]="estadisticasGraficos().recomendacion.no_porcentaje"></div>
+                </div>
+                <div class="bar-votos text-right muted-text">{{ estadisticasGraficos().recomendacion.no_cantidad }} usuarios</div>
+              </div>
+
+            </div>
+            <div class="total-badge text-center mt-4">
+              <span class="muted-text">Muestra Total: </span>
+              <span class="text-white text-bold">{{ estadisticasGraficos().totalEncuestas }} encuestas procesadas</span>
+            </div>
+          </div>
+
+        </div>
+      }
+
+      <div class="acciones mt-3">
+        <button class="btn-gaming btn-outline" (click)="cargarEncuestas()">
+          Sincronizar Servidor
+        </button>
+      </div>
+
+    </div>
+  }
+</div>

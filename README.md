@@ -64,6 +64,15 @@ Durante este cuarto sprint se consolidará el ecosistema completo de la aplicaci
 * **Uniformidad e Identidad Visual:** Asegurar que las nuevas pantallas y elementos interactivos sigan el diseño trabajado, estético y uniforme establecido a lo largo de toda la experiencia de usuario de la sala de juegos, utilizando de forma correcta animaciones y modales informativos integrados.
 ---
 
-### ⏳ Sprint #5 (Opcional / Recuperatorio)
-* **Estado:** *Pendiente de desarrollo*
-* **Alcance planificado:** Formulario de encuestas integrado con controles y validaciones avanzadas en base a rangos de edad y extensiones numéricas de contacto. Panel de administración restrictivo protegido mediante Guardias de Ruta (Guards) para visualización centralizada de métricas de encuestas. Animaciones fluidas de transición entre componentes.
+### ⏳ Sprint #5 (Recuperatorio)
+Durante este quinto sprint se complementará la plataforma mediante la implementación de un módulo de retroalimentación de usuarios, asegurando la integridad de los datos recolectados y la restricción de accesos a perfiles administrativos:
+
+* **Módulo de Encuesta de Satisfacción:** Diseño e integración de un formulario interactivo orientado a recolectar la opinión de los usuarios, donde la totalidad de los campos compartidos tendrán carácter estrictamente requerido y se vincularán de forma unívoca al identificador del usuario activo en la base de datos (Supabase o Firebase).
+* **Validación Avanzada de Datos Personales:** Implementación de controles y restricciones rigurosas para la captura de información demográfica y de contacto:
+    * **Nombre y Apellido:** Campo de texto estándar.
+    * **Edad:** Validación numérica restrictiva para admitir únicamente usuarios mayores de 18 años y menores de 99 años.
+    * **Número de Teléfono:** Restricción de entrada para procesar exclusivamente caracteres numéricos, con un límite máximo de extensión de hasta 10 dígitos.
+* **Componentes Diversificados de Entrada:** Estructuración de un cuestionario con un mínimo de 3 preguntas de opinión técnica o de usabilidad, implementando controles de interfaz variados y no repetitivos entre sí (como campos de texto libre, casillas de verificación —*checkbox*— y botones de selección única —*radiobutton*—).
+* **Panel Restringido de Métricas:** Creación de una sección analítica exclusiva orientada a la visualización centralizada y lectura de los resultados de las encuestas completadas por la comunidad.
+* **Seguridad y Control de Acceso (Guards):** Protección del panel de administración mediante el uso de Guardias de Ruta de Angular. El sistema denegará de forma automática el acceso a cualquier entidad que no cuente explícitamente con el rol o marca de administrador en el sistema.
+* **Fluidez Dinámica de Interfaz:** Incorporación de animaciones estéticas y fluidas para las transiciones entre los distintos componentes de la aplicación, optimizando la percepción de velocidad y la experiencia del usuario al navegar por la plataforma.
