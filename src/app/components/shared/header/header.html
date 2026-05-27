@@ -28,6 +28,12 @@
                 
                 @if (isLoggedIn()) {
                     <li class="nav-item">
+                        <a class="nav-link" routerLink="/encuesta" routerLinkActive="active">
+                        <i class="bi bi-graph-up"></i> Encuesta de satisfacción 
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" routerLink="/resultados" routerLinkActive="active">
                         <i class="bi bi-graph-up"></i> Puntuaciones Globales
                         </a>

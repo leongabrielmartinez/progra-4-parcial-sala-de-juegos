@@ -29,14 +29,18 @@
   filter: drop-shadow(0 0 6px var(--neon-cyan));
 }
 
+.navbar.custom-navbar .navbar-nav .nav-item {
+  white-space: nowrap;
+}
+
 .navbar.custom-navbar .navbar-nav .nav-link {
   color: var(--muted-foreground);
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem; 
+  padding: 0.5rem 0.6rem; 
   border: 2px solid transparent; 
   border-radius: var(--bs-border-radius);
   transition: all 0.2s ease;
@@ -87,13 +91,12 @@
 
 .nav-user-badge {
   color: var(--foreground);
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: bold;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.6rem;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  border-right: 1px solid var(--border);
 }
 
 .navbar.custom-navbar .navbar-nav .btn-logout-cyber:hover {

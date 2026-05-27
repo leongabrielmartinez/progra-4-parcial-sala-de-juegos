@@ -1,0 +1,107 @@
+<div class="d-flex flex-column align-items-center text-center mt-2 mb-4">
+  <div class="survey-icon-box d-flex align-items-center justify-content-center mb-2">
+    <i class="bi bi-graph-up text-cyber-cyan"></i>
+  </div>
+  <h1 class="survey-main-title text-uppercase m-0 mb-1">Encuesta de Satisfacción</h1>
+  <p class="survey-subtitle m-0">Ayúdanos a mejorar la sala de juegos</p>
+</div>
+
+<div class="survey-container card-gaming mx-auto p-4 hover-neon-cyan-glow-fixed">
+  
+  <form [formGroup]="encuestaForm" (ngSubmit)="enviarEncuesta()" class="d-flex flex-column">
+    
+    <div class="row-gaming">
+      <div class="input-group-cyber position-relative">
+        <i class="bi bi-person icon-cyber"></i>
+        <input type="text" formControlName="nombre" placeholder="Nombre">
+        @if (encuestaForm.get('nombre')?.invalid && encuestaForm.get('nombre')?.touched) {
+          <small class="error-msg">Obligatorio</small>
+        }
+      </div>
+
+      <div class="input-group-cyber position-relative">
+        <input type="text" formControlName="apellido" placeholder="Apellido">
+        @if (encuestaForm.get('apellido')?.invalid && encuestaForm.get('apellido')?.touched) {
+          <small class="error-msg">Obligatorio</small>
+        }
+      </div>
+    </div>
+
+    <div class="input-group-cyber position-relative">
+      <i class="bi bi-calendar-event icon-cyber"></i>
+      <input type="number" formControlName="edad" placeholder="Edad">
+      @if (encuestaForm.get('edad')?.invalid && encuestaForm.get('edad')?.touched) {
+        <small class="error-msg">Requiere entre 18 y 99 años</small>
+      }
+    </div>
+
+    <div class="input-group-cyber position-relative">
+      <i class="bi bi-telephone icon-cyber"></i>
+      <input type="text" formControlName="telefono" placeholder="Teléfono (Máx 10 dígitos)">
+      @if (encuestaForm.get('telefono')?.invalid && encuestaForm.get('telefono')?.touched) {
+        <small class="error-msg">Solo números (máx. 10)</small>
+      }
+    </div>
+
+    <div class="survey-divider my-3"></div>
+
+    <div class="survey-question-block mb-3">
+      <label class="survey-label mb-2 d-block">1. ¿Qué te pareció la fluidez de los juegos?</label>
+      <div class="d-flex gap-3 justify-content-start flex-wrap">
+        <label class="cyber-radio-label">
+          <input type="radio" formControlName="fluidez" value="excelente">
+          <span>Excelente</span>
+        </label>
+        <label class="cyber-radio-label">
+          <input type="radio" formControlName="fluidez" value="buena">
+          <span>Buena</span>
+        </label>
+        <label class="cyber-radio-label">
+          <input type="radio" formControlName="fluidez" value="mala">
+          <span>Mala</span>
+        </label>
+      </div>
+      @if (encuestaForm.get('fluidez')?.invalid && encuestaForm.get('fluidez')?.touched) {
+        <small class="error-msg-block">Selecciona una opción</small>
+      }
+    </div>
+
+    <div class="input-group-cyber position-relative mb-3">
+      <label class="survey-label mb-2 d-block">2. ¿Cuál es tu juego favorito?</label>
+      <div class="select-wrapper">
+        <i class="bi bi-controller icon-cyber"></i>
+        <select formControlName="juegoFavorito">
+          <option value="" disabled selected hidden>Selecciona un juego...</option>
+          <option value="ahorcado">Ahorcado</option>
+          <option value="mayor-menor">Mayor o Menor</option>
+          <option value="preguntados">Preguntados</option>
+          <option value="propio">Juego Propio</option>
+        </select>
+      </div>
+      @if (encuestaForm.get('juegoFavorito')?.invalid && encuestaForm.get('juegoFavorito')?.touched) {
+        <small class="error-msg-select">Selecciona una opción</small>
+      }
+    </div>
+
+  <div class="survey-question-block mb-4">
+    <label class="survey-label mb-2 d-block">3. ¿Recomendarías esta plataforma a tus amigos?</label>    
+    <div class="cyber-switch-container">
+      <span class="switch-label [class.active-no] Swindon">No</span>
+      <label class="cyber-switch">
+        <input type="checkbox" formControlName="recomienda">
+        <span class="slider"></span>
+      </label>
+      <span class="switch-label [class.active-si] Swindon">Sí</span>
+    </div>
+
+    @if (encuestaForm.get('recomienda')?.invalid && encuestaForm.get('recomienda')?.touched) {
+      <small class="error-msg-block">Debes seleccionar una opción</small>
+    }
+  </div>
+
+    <button type="submit" class="btn-survey-gaming w-100 mt-1" [disabled]="encuestaForm.invalid">
+      Enviar Encuesta
+    </button>
+
+  </form>
+</div>
