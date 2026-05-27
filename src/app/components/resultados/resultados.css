@@ -1,6 +1,3 @@
-/* ==========================================================================
-   Contenedor y Cabecera Estática
-   ========================================================================== */
 .juego-container {
   display: flex;
   flex-direction: column;
@@ -54,12 +51,9 @@
   gap: 1rem;
 }
 
-/* ==========================================================================
-   Botonera Superior (4 Juegos)
-   ========================================================================== */
 .navigation-tabs {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Cuadrícula 2x2 para pantallas chicas */
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
   width: 100%;
   margin-bottom: 1rem;
@@ -91,12 +85,9 @@
   font-weight: bold;
 }
 
-/* ==========================================================================
-   Tabla Estilizada Gaming
-   ========================================================================== */
 .table-container {
   width: 100%;
-  overflow-x: auto; /* Desplazamiento seguro en teléfonos móviles */
+  overflow-x: auto;
   background-color: #0d0e12;
   border: 2px solid var(--border);
   border-radius: var(--bs-border-radius);
@@ -108,13 +99,13 @@
   border-collapse: collapse;
   font-size: 0.9rem;
   text-align: left;
-  min-width: 550px;
+  min-width: 650px;
 }
 
 .gaming-table th {
   background-color: #15171e;
   color: var(--muted-foreground);
-  padding: 0.85rem 1rem;
+  padding: 0.85rem 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.75rem;
@@ -123,7 +114,7 @@
 }
 
 .gaming-table td {
-  padding: 0.85rem 1rem;
+  padding: 0.85rem 0.7rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   color: var(--muted-foreground);
   vertical-align: middle;
@@ -141,9 +132,6 @@
   font-size: 1rem;
 }
 
-/* ==========================================================================
-   Utilidades e Indicadores de Carga
-   ========================================================================== */
 .no-data-box {
   background-color: #0d0e12;
   border: 1px dashed var(--border);
@@ -188,16 +176,23 @@
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 
-/* ==========================================================================
-   Media Query para Computadoras y Tablets
-   ========================================================================== */
+.muted-text {
+  color: var(--muted-foreground);
+}
+
+.text-sm {
+  font-size: 0.8rem;
+  font-family: monospace;
+  letter-spacing: 0.02em;
+}
+
 @media (min-width: 768px) {
   .juego-container {
     padding: 2.5rem;
   }
 
   .navigation-tabs {
-    grid-template-columns: repeat(4, 1fr); /* Se transforma en una fila horizontal de 4 botones perfectos */
+    grid-template-columns: repeat(4, 1fr);
     gap: 0.75rem;
   }
 }

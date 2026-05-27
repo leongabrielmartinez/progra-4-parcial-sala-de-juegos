@@ -36,11 +36,11 @@ export class Resultados implements OnInit {
       if (juego === 'Ahorcado') {
         const { data, error } = await this.supabase
           .from('resultados_ahorcado')
-          .select('*')
+          .select('id, nombre_completo, palabra, letras_falladas, gano, tiempo_sobrante, fecha_partida::text')
           .order('gano', { ascending: false })
           .order('letras_falladas', { ascending: true })
           .order('tiempo_sobrante', { ascending: false })
-          .limit(5); // 
+          .limit(5);
 
         if (error) throw error;
         this.filasRanking.set(data || []);
@@ -49,10 +49,10 @@ export class Resultados implements OnInit {
       else if (juego === 'Mayor o Menor') {
         const { data, error } = await this.supabase
           .from('resultados_mayor_menor')
-          .select('*')
+          .select('id, nombre_completo, cartas_acertadas, tiempo_utilizado, gano, fecha_partida::text')
           .order('cartas_acertadas', { ascending: false })
           .order('tiempo_utilizado', { ascending: true })
-          .limit(5); // 
+          .limit(5);
 
         if (error) throw error;
         this.filasRanking.set(data || []);
@@ -61,10 +61,10 @@ export class Resultados implements OnInit {
       else if (juego === 'Preguntados') {
         const { data, error } = await this.supabase
           .from('resultados_preguntados')
-          .select('*')
+          .select('id, nombre_completo, preguntas_acertadas, total_preguntas, tiempo_utilizado, fecha_partida::text')
           .order('preguntas_acertadas', { ascending: false })
           .order('tiempo_utilizado', { ascending: true })
-          .limit(5); // 
+          .limit(5);
 
         if (error) throw error;
         this.filasRanking.set(data || []);
@@ -73,11 +73,11 @@ export class Resultados implements OnInit {
       else if (juego === 'El Intruso') {
         const { data, error } = await this.supabase
           .from('resultados_intruso')
-          .select('*')
+          .select('id, nombre_completo, gano, nivel_alcanzado, tiempo_utilizado, clicks_incorrectos, fecha_partida::text')
           .order('gano', { ascending: false })
           .order('nivel_alcanzado', { ascending: false })
           .order('tiempo_utilizado', { ascending: true })
-          .limit(5); 
+          .limit(5);
 
         if (error) throw error;
         this.filasRanking.set(data || []);

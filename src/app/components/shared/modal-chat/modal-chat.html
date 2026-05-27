@@ -10,7 +10,7 @@
         <div class="msg-bubble">
           <span class="msg-author">{{ msg.nombre_usuario}} {{ msg.apellido_usuario }}</span>
           <p class="msg-text">{{ msg.contenido }}</p>
-          <span class="msg-time">{{ msg.created_at | date:'HH:mm' }}</span>
+        <span class="msg-time">{{ msg.created_at | date:'HH:mm':'UTC' }}</span>
         </div>
       </div>
     } @empty {
