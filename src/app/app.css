@@ -1,0 +1,40 @@
+/* ==========================================================================
+   ANIMACIÓN  PARA SPRINT 5 (VIEW TRANSITIONS API)
+   ========================================================================== */
+
+/* 1. Definimos los fotogramas (Keyframes) */
+
+@keyframes transicionEntrada {
+  from {
+    opacity: 0;
+    transform: translateX(40px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes transicionSalida {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-20px) scale(0.98);
+  }
+}
+
+/* 2. Aplicamos las reglas a los pseudoelementos globales del navegador */
+
+/* Pantalla nueva que ENTRA: viene desde la derecha deslizándose suavemente */
+::view-transition-new(root) {
+  /* cubic-bezier(0.2, 0.8, 0.2, 1) arranca rápido y desacelera de forma muy elegante */
+  animation: transicionEntrada 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Pantalla vieja que SALE: se desvanece retrocediendo un poquito hacia la izquierda */
+::view-transition-old(root) {
+  animation: transicionSalida 0.3s ease-in both;
+}

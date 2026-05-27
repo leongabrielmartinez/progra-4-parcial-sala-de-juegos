@@ -25,11 +25,10 @@ export class Encuesta implements OnInit {
       nombre: ['', [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*$')]],
       apellido: ['', [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*$')]],
       edad: ['', [Validators.required, Validators.min(18), Validators.max(99)]],
-      // Se corrigió Validators.min(8) por Validators.minLength(8) para contar caracteres de texto
       telefono: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(8), Validators.maxLength(10)]],
       fluidez: ['', Validators.required],         
       juegoFavorito: ['', Validators.required],  
-      recomienda: [false] // El switch inicia en falso, no requiere Validator de obligatorio por ser booleano
+      recomienda: [false] 
     });
   }
 
