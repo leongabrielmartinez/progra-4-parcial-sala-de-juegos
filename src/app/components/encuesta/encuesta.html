@@ -14,15 +14,23 @@
       <div class="input-group-cyber position-relative">
         <i class="bi bi-person icon-cyber"></i>
         <input type="text" formControlName="nombre" placeholder="Nombre">
-        @if (encuestaForm.get('nombre')?.invalid && encuestaForm.get('nombre')?.touched) {
-          <small class="error-msg">Obligatorio</small>
+        @if (encuestaForm.get('nombre')?.touched && encuestaForm.get('nombre')?.invalid) {
+          @if (encuestaForm.get('nombre')?.hasError('required')) {
+            <small class="error-msg">El nombre es obligatorio</small>
+          } @else if (encuestaForm.get('nombre')?.hasError('pattern')) {
+            <small class="error-msg">Solo se permiten letras</small>
+          }
         }
       </div>
 
       <div class="input-group-cyber position-relative">
         <input type="text" formControlName="apellido" placeholder="Apellido">
-        @if (encuestaForm.get('apellido')?.invalid && encuestaForm.get('apellido')?.touched) {
-          <small class="error-msg">Obligatorio</small>
+        @if (encuestaForm.get('apellido')?.touched && encuestaForm.get('apellido')?.invalid) {
+          @if (encuestaForm.get('apellido')?.hasError('required')) {
+            <small class="error-msg">El apellido es obligatorio</small>
+          } @else if (encuestaForm.get('apellido')?.hasError('pattern')) {
+            <small class="error-msg">Solo se permiten letras</small>
+          }
         }
       </div>
     </div>
@@ -30,16 +38,30 @@
     <div class="input-group-cyber position-relative">
       <i class="bi bi-calendar-event icon-cyber"></i>
       <input type="number" formControlName="edad" placeholder="Edad">
-      @if (encuestaForm.get('edad')?.invalid && encuestaForm.get('edad')?.touched) {
-        <small class="error-msg">Requiere entre 18 y 99 años</small>
+      @if (encuestaForm.get('edad')?.touched && encuestaForm.get('edad')?.invalid) {
+        @if (encuestaForm.get('edad')?.hasError('required')) {
+          <small class="error-msg">La edad es obligatoria</small>
+        } @else if (encuestaForm.get('edad')?.hasError('min')) {
+          <small class="error-msg">Debes ser mayor de 18 años</small>
+        } @else if (encuestaForm.get('edad')?.hasError('max')) {
+          <small class="error-msg">La edad máxima permitida es 99 años</small>
+        }
       }
     </div>
 
     <div class="input-group-cyber position-relative">
       <i class="bi bi-telephone icon-cyber"></i>
-      <input type="text" formControlName="telefono" placeholder="Teléfono (Máx 10 dígitos)">
-      @if (encuestaForm.get('telefono')?.invalid && encuestaForm.get('telefono')?.touched) {
-        <small class="error-msg">Solo números (máx. 10)</small>
+      <input type="text" formControlName="telefono" placeholder="Teléfono (8 a 10 dígitos)">
+      @if (encuestaForm.get('telefono')?.touched && encuestaForm.get('telefono')?.invalid) {
+        @if (encuestaForm.get('telefono')?.hasError('required')) {
+          <small class="error-msg">El teléfono es obligatorio</small>
+        } @else if (encuestaForm.get('telefono')?.hasError('pattern')) {
+          <small class="error-msg">Solo se permiten números</small>
+        } @else if (encuestaForm.get('telefono')?.hasError('minlength')) {
+          <small class="error-msg">Mínimo 8 dígitos</small>
+        } @else if (encuestaForm.get('telefono')?.hasError('maxlength')) {
+          <small class="error-msg">Máximo 10 dígitos</small>
+        }
       }
     </div>
 
@@ -61,8 +83,8 @@
           <span>Mala</span>
         </label>
       </div>
-      @if (encuestaForm.get('fluidez')?.invalid && encuestaForm.get('fluidez')?.touched) {
-        <small class="error-msg-block">Selecciona una opción</small>
+      @if (encuestaForm.get('fluidez')?.touched && encuestaForm.get('fluidez')?.hasError('required')) {
+        <small class="error-msg-block">Debes calificar la fluidez del sistema</small>
       }
     </div>
 
@@ -78,26 +100,22 @@
           <option value="propio">Juego Propio</option>
         </select>
       </div>
-      @if (encuestaForm.get('juegoFavorito')?.invalid && encuestaForm.get('juegoFavorito')?.touched) {
-        <small class="error-msg-select">Selecciona una opción</small>
+      @if (encuestaForm.get('juegoFavorito')?.touched && encuestaForm.get('juegoFavorito')?.hasError('required')) {
+        <small class="error-msg-select">Debes elegir un juego de la lista</small>
       }
     </div>
 
-  <div class="survey-question-block mb-4">
-    <label class="survey-label mb-2 d-block">3. ¿Recomendarías esta plataforma a tus amigos?</label>    
-    <div class="cyber-switch-container">
-      <span class="switch-label [class.active-no] Swindon">No</span>
-      <label class="cyber-switch">
-        <input type="checkbox" formControlName="recomienda">
-        <span class="slider"></span>
-      </label>
-      <span class="switch-label [class.active-si] Swindon">Sí</span>
+    <div class="survey-question-block mb-4">
+      <label class="survey-label mb-2 d-block">3. ¿Recomendarías esta plataforma a tus amigos?</label>    
+      <div class="cyber-switch-container">
+        <span class="switch-label" [class.active-no]="!encuestaForm.get('recomienda')?.value">No</span>
+        <label class="cyber-switch">
+          <input type="checkbox" formControlName="recomienda">
+          <span class="slider"></span>
+        </label>
+        <span class="switch-label" [class.active-si]="encuestaForm.get('recomienda')?.value">Sí</span>
+      </div>
     </div>
-
-    @if (encuestaForm.get('recomienda')?.invalid && encuestaForm.get('recomienda')?.touched) {
-      <small class="error-msg-block">Debes seleccionar una opción</small>
-    }
-  </div>
 
     <button type="submit" class="btn-survey-gaming w-100 mt-1" [disabled]="encuestaForm.invalid">
       Enviar Encuesta

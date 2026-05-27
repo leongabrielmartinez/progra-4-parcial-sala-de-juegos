@@ -22,49 +22,47 @@ export class Encuesta implements OnInit {
 
   ngOnInit(): void {
     this.encuestaForm = this.fb.group({
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*$')]],
+      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*$')]],
       edad: ['', [Validators.required, Validators.min(18), Validators.max(99)]],
-      telefono: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.maxLength(10), Validators.min(8)]],
+      // Se corrigió Validators.min(8) por Validators.minLength(8) para contar caracteres de texto
+      telefono: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(8), Validators.maxLength(10)]],
       fluidez: ['', Validators.required],         
       juegoFavorito: ['', Validators.required],  
-      recomienda: ['', Validators.required] 
+      recomienda: [false] // El switch inicia en falso, no requiere Validator de obligatorio por ser booleano
     });
   }
 
   async enviarEncuesta() {
-      if (this.encuestaForm.valid) {
-        try {
-          // 1. Extraemos los valores del formulario
-          const formValues = this.encuestaForm.value;
+    if (this.encuestaForm.valid) {
+      try {
+        const formValues = this.encuestaForm.value;
 
-          // 2. Mapeamos los datos convirtiendo el booleano del checkbox en 'si' o 'no'
-          const datosEncuesta: IEncuestaForm = {
-            ...formValues,
-            recomienda: formValues.recomienda ? 'si' : 'no' // <--- AQUÍ SE REPARA EL ERROR
-          };
+        const datosEncuesta: IEncuestaForm = {
+          ...formValues,
+          recomienda: formValues.recomienda ? 'si' : 'no'
+        };
 
-          // 3. Enviamos los datos ya procesados (con 2 caracteres exactos)
-          await this.encuestasService.guardarEncuesta(datosEncuesta);
+        await this.encuestasService.guardarEncuesta(datosEncuesta);
 
-          this.modalAlertService.showAlert(
-            '¡Datos Guardados!',
-            'Tu encuesta de satisfacción ha sido registrada con éxito en el sistema central. ¡Gracias por ayudarnos a mejorar!',
-            'success'
-          );
+        this.modalAlertService.showAlert(
+          '¡Datos Guardados!',
+          'Tu encuesta de satisfacción ha sido registrada con éxito en el sistema central. ¡Gracias por ayudarnos a mejorar!',
+          'success'
+        );
 
-          this.encuestaForm.reset();
-          this.router.navigate(['/home']);
+        this.encuestaForm.reset({ recomienda: false });
+        this.router.navigate(['/home']);
 
-        } catch (error: any) {
-          this.modalAlertService.showAlert(
-            'Fallo de Conexión',
-            error.message || 'No se pudo procesar la encuesta en este momento. Inténtalo más tarde.',
-            'error'
-          );
-        }
-      } else {
-        this.encuestaForm.markAllAsTouched();
+      } catch (error: any) {
+        this.modalAlertService.showAlert(
+          'Fallo de Conexión',
+          error.message || 'No se pudo procesar la encuesta en este momento. Inténtalo más tarde.',
+          'error'
+        );
       }
+    } else {
+      this.encuestaForm.markAllAsTouched();
     }
+  }
 }
